@@ -1,0 +1,261 @@
+{
+    "tables": [{
+            "name": "company_table",
+            "title": "Company Details",
+            "key": "firmName",
+            "objectid": "objectid",
+            "layerId": "Companies",
+            "checkForAttach": true,
+            "checkPublicAttach": true,
+            "storyMapColumns": [
+                "firmStory",
+                "storymaps"
+            ],
+            "videoColumns": [],
+            "linkColumns": [
+                "firmWeb"
+            ],
+            "headers": [{
+                    "name": "action",
+                    "alias": "Actions",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "firmName",
+                    "alias": "Company Name",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "COMP_GOUV",
+                    "alias": "Governorate",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "Comp_sector_New",
+                    "alias": "Company Sector",
+                    "format": {},
+                    "isPublic": true
+                }
+            ],
+            "specialColumns": [],
+            "publicColumns": [
+                "firmName",
+                "firmGender",
+                "COMP_GOUV",
+                "COMP_DELEG",
+                "Comp_sector_New",
+                "Comp_SubSec_New",
+                "Subsect_industry",
+                "Total_Number_Employees",
+                "Company_Class"
+            ]
+        },
+        {
+            "name": "grants_table",
+            "title": "Grant Details",
+            "key": "firmName_ref",
+            "objectid": "OBJECTID",
+            "layerId": "Grants",
+            "checkForAttach": true,
+            "checkPublicAttach": false,
+            "storyMapColumns": [
+                "storymaps"
+            ],
+            "videoColumns": [],
+            "linkColumns": [],
+            "headers": [{
+                    "name": "action",
+                    "alias": "Zoom",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "firmName_ref",
+                    "alias": "Company Name or ID No",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "Type_Grant_Company",
+                    "alias": "Relationships to Jobs",
+                    "format": {},
+                    "isPublic": false
+                },
+                {
+                    "name": "Field8",
+                    "alias": "Grant Type",
+                    "format": {},
+                    "isPublic": false
+                },
+                {
+                    "name": "Status_of_Grant",
+                    "alias": "Grant Status",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "COMP_GOUV",
+                    "alias": "Governorate",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "sector_",
+                    "alias": "Sector",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "UsdGrantsValueRounded",
+                    "alias": "Grant Value USD",
+                    "format": {
+                        "prefix": "$",
+                        "rounding": 0,
+                        "isPublic": false
+                    },
+                    "modify": {
+                        "columns": [{ "column": "Type_Grant_Company", "value": "Beneficiary company" }, { "column": "Field8", "value": "MFI grants" }],
+                        "result": "NA"
+                    }
+                }
+            ],
+            "specialColumns": [{
+                    "name": "UsdGrantsValueRounded",
+                    "alias": "Grant Value USD",
+                    "format": {
+                        "prefix": "$",
+                        "rounding": 0
+                    }
+                },
+                {
+                    "name": "UsdDisbursmentValueRounded",
+                    "alias": "Grant Disbursed USD",
+                    "format": {
+                        "prefix": "$",
+                        "rounding": 0
+                    }
+                }
+            ],
+            "publicColumns": [
+                "firmName_ref",
+                "firmGender",
+                "COMP_GOUV",
+                "storymaps",
+                "COMP_DELEG",
+                "Type_of_institution",
+                "purpose_of_Grant",
+                "Status_of_Grant",
+                "Grant_Description",
+                "sector_",
+                "sub_sector",
+                "industry"
+            ]
+        },
+        {
+            "name": "atf_table",
+            "title": "ATF Details",
+            "key": "ObjectId",
+            "objectid": "ObjectId",
+            "layerId": "ATF",
+            "checkForAttach": false,
+            "checkPublicAttach": false,
+            "storyMapColumns": [],
+            "videoColumns": [],
+            "linkColumns": [],
+            "headers": [{
+                    "name": "action",
+                    "alias": "Zoom",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "Cluster_Name",
+                    "alias": "Cluster Name",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "Fiancial_institustion",
+                    "alias": "Financial Institution",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "Gouvernorate",
+                    "alias": "Governorate",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "Sector",
+                    "alias": "Sector",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "USD_Value_of_ATF",
+                    "alias": "USD Value of ATF",
+                    "format": {
+                        "prefix": "$",
+                        "rounding": 0
+                    },
+                    "isPublic": true
+                },
+                {
+                    "name": "ObjectId",
+                    "alias": "ID",
+                    "format": {},
+                    "isPublic": true
+                }
+            ],
+            "specialColumns": []
+        },
+        {
+            "name": "policy_table",
+            "title": "Policy Details",
+            "key": "OBJECTID_1",
+            "objectid": "OBJECTID_1",
+            "layerId": "Policy",
+            "checkForAttach": false,
+            "checkPublicAttach": false,
+            "storyMapColumns": [],
+            "videoColumns": [],
+            "linkColumns": [],
+            "headers": [{
+                    "name": "action",
+                    "alias": "Zoom",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "ActivTITLE",
+                    "alias": "Activity Title",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "Governorate",
+                    "alias": "Governorate",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "Norm_1",
+                    "alias": "Measure Type",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "OBJECTID_1",
+                    "alias": "ID",
+                    "format": {},
+                    "isPublic": true
+                }
+            ],
+            "specialColumns": []
+        }
+    ]
+}

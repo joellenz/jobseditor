@@ -1,0 +1,1044 @@
+{
+    "themes": [
+        {
+            "name": "leads",
+            "title": "Leads",
+            "isPublic": false,
+            "default": false,
+            "status": "ready",
+            "mapId": "a0c6903525e84330a79cfc791fb497f1",
+            "mapIdPublic": null,
+            "contents": [
+                {
+                    "name": "Companies Overview",
+                    "description": "Companies with a status of lead or currently in review",
+                    "cards": [
+                        {
+                            "name": "ind_company_under_review_count",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "ind_company_lead_count",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "chart_company_pipeline_sectors_count_bar",
+                            "isPublic": true
+                        }
+                    ],
+                    "tables": []
+                },
+                {
+                    "name": "Company Detail",
+                    "description": "Companies with a status of lead or currently in review",
+                    "cards": [],
+                    "tables": [
+                        {
+                            "tableName": "company_table",
+                            "filters": [
+                                {
+                                    "order": 1,
+                                    "column": "firmStatus",
+                                    "values": [
+                                        "Lead",
+                                        "In Review"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "filters": [
+                {
+                    "name": "filter_gouvernorate",
+                    "display": true,
+                    "title": "Governorate(s)",
+                    "layerId": "Companies",
+                    "useDomain": true,
+                    "column": "COMP_GOUV",
+                    "isPublic": true
+                },
+                {
+                    "name": "companystatus",
+                    "display": true,
+                    "title": "Company Status",
+                    "layerId": "Companies",
+                    "useDomain": false,
+                    "column": "firmStatus",
+                    "isPublic": true,
+                    "values": [
+                        {
+                            "text": "Lead",
+                            "value": "Lead"
+                        },
+                        {
+                            "text": "In Review",
+                            "value": "In Review"
+                        }
+                    ]
+                },
+                {
+                    "name": "companysector",
+                    "display": true,
+                    "title": "Sector(s)",
+                    "layerId": "Companies",
+                    "useDomain": true,
+                    "column": "Comp_sector_New",
+                    "isPublic": true
+                },
+                {
+                    "name": "companygender",
+                    "display": true,
+                    "title": "Company Owner Gender",
+                    "layerId": "Companies",
+                    "useDomain": true,
+                    "column": "firmGender",
+                    "isPublic": true
+                }
+            ]
+        },
+        {
+            "name": "clients",
+            "title": "Clients",
+            "isPublic": true,
+            "default": true,
+            "status": "ready",
+            "mapId": "8932219c29f941b9a5049c5470537a6d",
+            "mapIdPublic": "c3aea6a2bf244a1ebb87ade1a8a5bfb8",
+            "contents": [
+                {
+                    "name": "Company Engagement",
+                    "description": "Company engagement / companies with signed PAs",
+                    "isPublic": true,
+                    "cards": [
+                        {
+                            "name": "ind_pa_signed_count",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "ind_pa_count",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "ind_paa_count",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "chart_companies_by_gouvernorate_count_bar",
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": "filter_gouvernorate"
+                            }
+                        },
+                        {
+                            "name": "chart_pa_by_gouvernorate_count_bar",
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": "filter_gouvernorate"
+                            }
+                        },
+                        {
+                            "name": "chart_companies_by_sectors_count_bar",
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": "companysector"
+                            }
+                        }
+                    ],
+                    "tables": []
+                },
+                {
+                    "name": "Jobs",
+                    "description": "Company engagement / companies with signed PAs",
+                    "isPublic": true,
+                    "cards": [
+                        {
+                            "name": "ind_created_jobs_sum",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "ind_pa_match_jobs_sum",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "ind_pa_created_jobs_sum",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "chart_gender_jobs_pie",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "chart_pa_Gender_by_year_jobs_sum",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "chart_pa_matched_created_jobs_sum",
+                            "isPublic": true
+                        }
+                    ],
+                    "tables": []
+                },
+                {
+                    "name": "Sales",
+                    "description": "Company engagement / companies with signed PAs",
+                    "isPublic": true,
+                    "cards": [
+                        {
+                            "name": "ind_total_annual_sales_sum",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "ind_total_annual_exports_sum_tnd",
+                            "isPublic": true
+                        }
+                    ],
+                    "tables": []
+                },
+                {
+                    "name": "Company Details",
+                    "description": "Company engagement / companies with signed PAs",
+                    "isPublic": true,
+                    "cards": [],
+                    "tables": [
+                        {
+                            "tableName": "company_table",
+                            "filters": [
+                                {
+                                    "order": 1,
+                                    "column": "firmStatus",
+                                    "values": [
+                                        "Signed"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "filters": [
+                {
+                    "name": "filter_gouvernorate",
+                    "display": true,
+                    "title": "Governorate(s)",
+                    "layerId": "Companies",
+                    "preFilter": "firmStatus::Signed",
+                    "useDomain": true,
+                    "column": "COMP_GOUV",
+                    "filterType": "combo",
+                    "isPublic": true
+                },
+                {
+                    "name": "companysector",
+                    "display": true,
+                    "title": "Sector(s)",
+                    "layerId": "Companies",
+                    "preFilter": "firmStatus::Signed",
+                    "useDomain": true,
+                    "column": "Comp_sector_New",
+                    "filterType": "combo",
+                    "isPublic": true
+                },
+                {
+                    "name": "companygender",
+                    "display": true,
+                    "title": "Company Owner Gender",
+                    "layerId": "Companies",
+                    "preFilter": "firmStatus::Signed",
+                    "useDomain": true,
+                    "column": "firmGender",
+                    "filterType": "combo",
+                    "isPublic": true
+                },
+                {
+                    "name": "companyclass",
+                    "display": true,
+                    "filterType": "range",
+                    "title": "Company Size",
+                    "layerId": "Companies",
+                    "preFilter": "firmStatus::Signed",
+                    "useDomain": false,
+                    "column": "Total_Number_Employees",
+                    "isPublic": true,
+                    "values": [
+                        {
+                            "text": "Micro company (1 to 5 employees)",
+                            "value": "0:5"
+                        },
+                        {
+                            "text": "Small company (6 to 20 employees)",
+                            "value": "6:20"
+                        },
+                        {
+                            "text": "Medium company (21 to 499 employees)",
+                            "value": "21:499"
+                        },
+                        {
+                            "text": "Large company (equal or more than 500 employees",
+                            "value": "500:9999999999"
+                        }
+                    ]
+                },
+                {
+                    "name": "timefilters",
+                    "display": true,
+                    "filterType": "time",
+                    "isPublic": true,
+                    "subFilters": [
+                        {
+                            "name": "signedyear",
+                            "display": true,
+                            "title": "Fiscal Year(s)",
+                            "layerId": "Companies",
+                            "preFilter": "firmStatus::Signed",
+                            "layerIds": [
+                                {
+                                    "layerId": "Partnership_Agreement",
+                                    "column": "PA_signatureDate"
+                                },
+                                {
+                                    "layerId": "PA_Amended",
+                                    "column": "COP_signature_date"
+                                }
+                            ],
+                            "useDomain": false,
+                            "column": "PA_signatureDate",
+                            "columns": [
+                                "PA_signatureDate",
+                                "COP_signature_date"
+                            ],
+                            "filterType": "combo",
+                            "isPublic": true,
+                            "values": [
+                                {
+                                    "index": 0,
+                                    "text": "FY 2019",
+                                    "value": "2018-10-01:2019-09-30"
+                                },
+                                {
+                                    "index": 1,
+                                    "text": "FY 2020",
+                                    "value": "2019-10-01:2020-09-30"
+                                },
+                                {
+                                    "index": 2,
+                                    "text": "FY 2021",
+                                    "value": "2020-10-01:2021-09-30"
+                                },
+                                {
+                                    "index": 3,
+                                    "text": "FY 2022",
+                                    "value": "2021-10-01:2022-09-30"
+                                },
+                                {
+                                    "index": 4,
+                                    "text": "FY 2023",
+                                    "value": "2022-10-01:2023-09-30"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "signeddate",
+                            "display": true,
+                            "title": "Date Range",
+                            "layerId": "Companies",
+                            "preFilter": "firmStatus::Signed",
+                            "layerIds": [
+                                {
+                                    "layerId": "Partnership_Agreement",
+                                    "column": "PA_signatureDate"
+                                },
+                                {
+                                    "layerId": "PA_Amended",
+                                    "column": "COP_signature_date"
+                                }
+                            ],
+                            "useDomain": false,
+                            "column": "PA_signatureDate",
+                            "filterType": "UserInput",
+                            "values": [
+                                {
+                                    "text": "Start Date",
+                                    "type": "datepicker",
+                                    "value": "startDate"
+                                },
+                                {
+                                    "text": "End Date",
+                                    "type": "datepicker",
+                                    "value": "endDate"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "grants",
+            "title": "Grants",
+            "isPublic": true,
+            "default": false,
+            "status": "ready",
+            "mapId": "6358ddd296bb40dd9c48c55151e67515",
+            "mapIdPublic": "1ecd0ba0652044779290049e28224e7f",
+            "contents": [
+                {
+                    "name": "COVID-19 Fund Grants",
+                    "description": "Overview of the progress and results from the COVID-19 Enterprise Recovery Grant Fund",
+                    "isPublic": true,
+                    "cards": [
+                        {
+                            "name": "grant_covid_total_awarded",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "grant_covid_total_disbursed",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_covid_total_grantee_benef",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "grants_covid_total_grantees",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grants_covid_total_beneficiaries",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "Total_amount_of_grants_disbursed_to_microentreprises_by_MFIs",
+                            "cols": 6,
+                            "highlight": false,
+                            "isPublic": false
+                        },
+                        {
+                            "name": "_MFIs_Associations",
+                            "cols": 6,
+                            "pubCols": 6,
+                            "highlight": true,
+                            "isPublic": true
+                        },
+                        {
+                            "name": "Total_Number_of_MSME",
+                            "cols": 6,
+                            "pubCols": 6,
+                            "highlight": true,
+                            "isPublic": true
+                        },
+                        {
+                            "name": "grant_covid_total_msmes",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "grant_covid_private_total_msmes",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "grant_covid_jobs_sustained",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_covid_jobs_created",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_covid_percent_sales",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_covid_incremental_sales",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "chart_covid_grants_by_gouvernorate_sum_bar",
+                            "cols": 12,
+                            "pubCols": 12,
+                            "highlight": false,
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": "filter_gouvernorate"
+                            }
+                        },
+                        {
+                            "name": "chart_covid_grants_by_sector_sum_bar",
+                            "cols": 12,
+                            "pubCols": 12,
+                            "highlight": false,
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": "grantsector"
+                            }
+                        },
+                        {
+                            "name": "grant_covid_by_gender_sub_donut",
+                            "cols": 12,
+                            "pubCols": 12,
+                            "highlight": false,
+                            "isPublic": true
+                        }
+                    ],
+                    "tables": []
+                },
+                {
+                    "name": "General Fund Grants",
+                    "description": "General Project Grant Fund",
+                    "isPublic": true,
+                    "cards": [
+                        {
+                            "name": "grant_non_covid_total_awarded",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "grant_noncovid_total_disbursed",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_noncovid_total_grantee_benef",
+                            "cols": 4,
+                            "pubCols": 6,
+                            "highlight": false,
+                            "isPublic": true
+                        },
+                        {
+                            "name": "grant_noncovid_total_grantees",
+                            "cols": 4,
+                            "pubCols": 6,
+                            "highlight": false,
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grants_noncovid_total_beneficiaries",
+                            "cols": 4,
+                            "pubCols": 6,
+                            "highlight": false,
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_noncovid_total_msmes",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_noncovid_private_total_msmes",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_noncovid_jobs_sustained",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_noncovid_jobs_created",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_noncovid_percent_sales",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_noncovid_incremental_sales",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "chart_non_covid_grants_by_gouvernorate_sum_bar",
+                            "cols": 12,
+                            "pubCols": 12,
+                            "highlight": false,
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": "filter_gouvernorate"
+                            }
+                        },
+                        {
+                            "name": "chart_non_covid_grants_by_sector_sum_bar",
+                            "cols": 12,
+                            "pubCols": 12,
+                            "highlight": false,
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": "grantsector"
+                            }
+                        },
+                        {
+                            "name": "grant_non_covid_by_gender_sub_donut",
+                            "cols": 12,
+                            "pubCols": 12,
+                            "highlight": false,
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": null
+                            }
+                        }
+                    ],
+                    "tables": []
+                },
+                {
+                    "name": "All Grants",
+                    "description": "COVID-19 fund and general project fund grants",
+                    "isPublic": true,
+                    "cards": [
+                        {
+                            "name": "grant_total_awarded",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "grant_total_disbursed",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_total_grantee_benef",
+                            "cols": 4,
+                            "pubCols": 6,
+                            "highlight": false,
+                            "isPublic": true
+                        },
+                        {
+                            "name": "grant_total_grantees",
+                            "cols": 4,
+                            "pubCols": 6,
+                            "highlight": false,
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grants_total_beneficiaries",
+                            "cols": 4,
+                            "pubCols": 6,
+                            "highlight": false,
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_total_msmes",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "grant_private_total_msmes",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "grant_jobs_sustained",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_jobs_created",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_percent_sales",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "grant_incremental_sales",
+                            "isPublic": false
+                        },
+                        {
+                            "name": "chart_grants_by_gouvernorate_sum_bar",
+                            "cols": 12,
+                            "pubCols": 12,
+                            "highlight": false,
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": "filter_gouvernorate"
+                            }
+                        },
+                        {
+                            "name": "chart_grants_by_sector_sum_bar",
+                            "cols": 12,
+                            "pubCols": 12,
+                            "highlight": false,
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": "grantsector"
+                            }
+                        }
+                    ],
+                    "tables": []
+                },
+                {
+                    "name": "Grants Detail",
+                    "description": "Grant details table",
+                    "isPublic": true,
+                    "cards": [],
+                    "tables": [
+                        {
+                            "tableName": "grants_table",
+                            "filters": []
+                        }
+                    ]
+                }
+            ],
+            "filters": [
+                {
+                    "name": "granttype",
+                    "display": true,
+                    "title": "By Grant Type",
+                    "layerId": "Grants",
+                    "useDomain": false,
+                    "column": "Field8",
+                    "isPublic": false
+                },
+                {
+                    "name": "grantcompanytype",
+                    "display": true,
+                    "title": "By Relationship to JOBS",
+                    "layerId": "Grants",
+                    "useDomain": false,
+                    "column": "Type_Grant_Company",
+                    "isPublic": false
+                },
+                {
+                    "name": "grantgouvernorate",
+                    "display": true,
+                    "title": "By Governorate",
+                    "layerId": "Grants",
+                    "useDomain": false,
+                    "column": "COMP_GOUV",
+                    "isPublic": true
+                },
+                {
+                    "name": "grantsector",
+                    "display": true,
+                    "title": "By sector",
+                    "layerId": "Grants",
+                    "useDomain": false,
+                    "column": "sector_",
+                    "isPublic": true
+                },
+                {
+                    "name": "companygender",
+                    "display": true,
+                    "title": "By ownership gender",
+                    "layerId": "Grants",
+                    "useDomain": false,
+                    "column": "firmGender",
+                    "isPublic": true
+                },
+                {
+                    "name": "grantpurpose",
+                    "display": true,
+                    "title": "By grant purpose",
+                    "layerId": "Grants",
+                    "useDomain": false,
+                    "column": "purpose_of_Grant",
+                    "isPublic": true
+                },
+                {
+                    "name": "grantstatus",
+                    "display": true,
+                    "title": "By grant status",
+                    "layerId": "Grants",
+                    "useDomain": false,
+                    "column": "Status_of_Grant",
+                    "isPublic": false
+                },
+                {
+                    "name": "grantfund",
+                    "display": true,
+                    "title": "By grant fund",
+                    "filterType": "aliased",
+                    "layerId": "Grants",
+                    "useDomain": false,
+                    "column": "Covid_NON_covid_fund",
+                    "isPublic": true,
+                    "values": [
+                        {
+                            "text": "COVID-19 FUND",
+                            "value": "yes"
+                        },
+                        {
+                            "text": "GENERAL FUND",
+                            "value": "no"
+                        }
+                    ]
+                },
+                {
+                    "name": "enterprisesize",
+                    "display": false,
+                    "title": "By size of enterprise",
+                    "layerId": "Grants",
+                    "useDomain": false,
+                    "column": "null",
+                    "isPublic": false,
+                    "values": [
+                        {
+                            "text": "1-20 employees",
+                            "value": "0:20"
+                        },
+                        {
+                            "text": "21-100 employees",
+                            "value": "21:100"
+                        },
+                        {
+                            "text": "Over 100 employees",
+                            "value": "101:9999999999"
+                        }
+                    ]
+                },
+                {
+                    "name": "timefilters",
+                    "display": false,
+                    "filterType": "time",
+                    "isPublic": true,
+                    "subFilters": [
+                        {
+                            "name": "signedyear",
+                            "display": true,
+                            "title": "Fiscal Year(s)",
+                            "layerId": "Companies",
+                            "useDomain": false,
+                            "column": "PA_signatureDate",
+                            "filterType": "combo",
+                            "isPublic": true,
+                            "values": [
+                                {
+                                    "index": 0,
+                                    "text": "FY 2019",
+                                    "value": "2018-10-01:2019-09-30"
+                                },
+                                {
+                                    "index": 1,
+                                    "text": "FY 2020",
+                                    "value": "2019-10-01:2020-09-30"
+                                },
+                                {
+                                    "index": 2,
+                                    "text": "FY 2021",
+                                    "value": "2020-10-01:2021-09-30"
+                                },
+                                {
+                                    "index": 3,
+                                    "text": "FY 2022",
+                                    "value": "2021-10-01:2022-09-30"
+                                },
+                                {
+                                    "index": 4,
+                                    "text": "FY 2023",
+                                    "value": "2022-10-01:2023-09-30"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "signeddate",
+                            "display": true,
+                            "title": "Date Range",
+                            "layerId": "Grants",
+                            "useDomain": false,
+                            "column": "PA_signatureDate",
+                            "filterType": "UserInput",
+                            "values": [
+                                {
+                                    "text": "Start Date",
+                                    "type": "datepicker",
+                                    "value": "startDate"
+                                },
+                                {
+                                    "text": "End Date",
+                                    "type": "datepicker",
+                                    "value": "endDate"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "atf",
+            "title": "ATF",
+            "isPublic": true,
+            "default": false,
+            "status": "ready",
+            "mapId": "39e4568c5d6f49b3accae0eb579c94c6",
+            "mapIdPublic": "d8b34c2bb1f94416878f195bdc7a3a37",
+            "contents": [
+                {
+                    "name": "Access to Finance (ATF)",
+                    "description": "General Access to Finance (ATF) information",
+                    "isPublic": true,
+                    "cards": [
+                        {
+                            "name": "atf_USD_Value_of_ATF",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "atf_number_of_beneficiaries",
+                            "isPublic": true
+                        },
+                        {
+                            "name": "atf_chart_by_governorate_count_bar",
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": "filter_gouvernorate"
+                            }
+                        },
+                        {
+                            "name": "atf_chart_by_sectors_count_bar",
+                            "isPublic": true,
+                            "mainFilter": {
+                                "name": "filter_sector"
+                            }
+                        },
+                        {
+                            "name": "ATF_chart_by_gender_sub_donut",
+                            "isPublic": true
+                        }
+                    ],
+                    "tables": []
+                },
+                {
+                    "name": "ATF Details",
+                    "description": "Access to Finance (ATF) detailed information",
+                    "isPublic": true,
+                    "cards": [],
+                    "tables": [
+                        {
+                            "tableName": "atf_table",
+                            "filters": []
+                        }
+                    ]
+                }
+            ],
+            "filters": [
+                {
+                    "name": "filter_gouvernorate",
+                    "display": true,
+                    "title": "Governorate(s)",
+                    "layerId": "ATF",
+                    "useDomain": false,
+                    "column": "Gouvernorate",
+                    "filterType": "combo",
+                    "isPublic": true
+                },
+                {
+                    "name": "filter_serunser",
+                    "display": true,
+                    "title": "Served/Underserved",
+                    "layerId": "ATF",
+                    "useDomain": false,
+                    "column": "SerUnser",
+                    "filterType": "combo",
+                    "isPublic": true,
+                    "values": [
+                        {
+                            "text": "Served",
+                            "value": "Served"
+                        },
+                        {
+                            "text": "Underserved",
+                            "value": "Underserved"
+                        }
+                    ]
+                },
+                {
+                    "name": "filter_sector",
+                    "display": true,
+                    "title": "Sector(s)",
+                    "layerId": "ATF",
+                    "useDomain": false,
+                    "column": "Sector",
+                    "filterType": "combo",
+                    "isPublic": true
+                },
+                {
+                    "name": "filter_institution",
+                    "display": true,
+                    "title": "Institution(s)",
+                    "layerId": "ATF",
+                    "useDomain": false,
+                    "column": "Fiancial_institustion",
+                    "filterType": "combo",
+                    "isPublic": true
+                },
+                {
+                    "name": "filter_cluster",
+                    "display": true,
+                    "title": "Cluster Name(s)",
+                    "layerId": "ATF",
+                    "useDomain": false,
+                    "column": "Cluster_Name",
+                    "filterType": "combo",
+                    "isPublic": true
+                },
+                {
+                    "name": "filter_finance_type",
+                    "display": true,
+                    "title": "Financing Type(s)",
+                    "layerId": "ATF",
+                    "useDomain": false,
+                    "column": "Type_of_Financing",
+                    "filterType": "combo",
+                    "isPublic": true
+                },
+                {
+                    "name": "filter_atf_year",
+                    "display": false,
+                    "title": "Year",
+                    "layerId": "ATF",
+                    "useDomain": false,
+                    "column": "Period",
+                    "filterType": "combo",
+                    "isPublic": true,
+                    "values": [
+                        {
+                            "text": "Year 1",
+                            "type": "fuzzy",
+                            "value": "Y01*"
+                        },
+                        {
+                            "text": "Year 2",
+                            "type": "fuzzy",
+                            "value": "Y02*"
+                        },
+                        {
+                            "text": "Year 3",
+                            "type": "fuzzy",
+                            "value": "Y03*"
+                        },
+                        {
+                            "text": "Year 4",
+                            "type": "fuzzy",
+                            "value": "Y04*"
+                        },
+                        {
+                            "text": "Year 5",
+                            "type": "fuzzy",
+                            "value": "Y05*"
+                        }
+                    ]
+                },
+                {
+                    "name": "filter_atf_quarter",
+                    "display": false,
+                    "title": "Quarter",
+                    "layerId": "ATF",
+                    "useDomain": false,
+                    "column": "Period",
+                    "filterType": "combo",
+                    "isPublic": true,
+                    "values": [
+                        {
+                            "text": "Quarter 1",
+                            "type": "fuzzy",
+                            "value": "*Q01"
+                        },
+                        {
+                            "text": "Quarter 2",
+                            "type": "fuzzy",
+                            "value": "*Q02"
+                        },
+                        {
+                            "text": "Quarter 3",
+                            "type": "fuzzy",
+                            "value": "*Q03"
+                        },
+                        {
+                            "text": "Quarter 4",
+                            "type": "fuzzy",
+                            "value": "*Q04"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

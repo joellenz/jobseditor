@@ -1,0 +1,493 @@
+{
+    "database": {
+        "name": "tunisiajobs_c1_rep",
+        "layerId": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/",
+        "env": ""
+    },
+    "datasources": [
+        {
+            "layerId": "Companies",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/0",
+            "type": "featureLayer",
+            "preFilter": "1=1",
+            "relLayerId": null,
+            "relationshipInfos": [
+                {
+                    "name": "company-to-pa",
+                    "relLayerId": "Partnership_Agreement",
+                    "relType": "many-to-one",
+                    "keyField": "PAREF",
+                    "foreignKeyField": "PAREF",
+                    "modifyValues": true,
+                    "modifyActions": [
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "PA_signatureDate",
+                            "newColumn": "PA_signatureDate"
+                        }
+                    ],
+                    "description": "This relationship will select all related companies for each PA"
+                },
+                {
+                    "name": "company-to-paa",
+                    "relLayerId": "PA_Amended",
+                    "relType": "many-to-one",
+                    "keyField": "PAREF",
+                    "foreignKeyField": "PAREF",
+                    "modifyValues": true,
+                    "modifyActions": [
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "COP_signature_date",
+                            "newColumn": "COP_signature_date"
+                        }
+                    ],
+                    "description": "This relationship will select all related companies for each PA"
+                },
+                {
+                    "name": "company-to-paamend",
+                    "relLayerId": "Partnership_Agreement_amend",
+                    "relType": "many-to-one",
+                    "keyField": "PAREF",
+                    "foreignKeyField": "PAREF",
+                    "modifyValues": false,
+                    "modifyActions": [],
+                    "description": "This relationship will select all related companies for each PA"
+                }
+            ]
+        },
+        {
+            "layerId": "Partnership_Agreement",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/4",
+            "type": "featureTable",
+            "preFilter": "PA_signatureDate <> null",
+            "relLayerId": "Companies",
+            "relationshipInfos": [
+                {
+                    "name": "pa-parentcompany",
+                    "relLayerId": "Companies",
+                    "relType": "one-to-one",
+                    "keyField": "CompanyId",
+                    "foreignKeyField": "objectid",
+                    "modifyValues": true,
+                    "modifyActions": [
+                        {
+                            "type": "replace",
+                            "findString": "PA-",
+                            "replaceWith": "",
+                            "sourceColumn": "PAREF",
+                            "newForeignKeyField": "CompanyId"
+                        }
+                    ],
+                    "description": "Need to strip away 'PAREF-' from value to get to parent company"
+                },
+                {
+                    "name": "pa-company-gouv",
+                    "relLayerId": "Companies",
+                    "relType": "one-to-one",
+                    "keyField": "CompanyId",
+                    "foreignKeyField": "objectid",
+                    "modifyValues": true,
+                    "modifyActions": [
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "COMP_GOUV",
+                            "newColumn": "COMP_GOUV"
+                        },
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "Comp_sector_New",
+                            "newColumn": "Comp_sector_New"
+                        },
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "firmGender",
+                            "newColumn": "firmGender"
+                        },
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "Total_Number_Employees",
+                            "newColumn": "Total_Number_Employees"
+                        }
+                    ],
+                    "description": "Need to strip away 'PAREF-' from value to get to parent company"
+                },
+                {
+                    "name": "pa-parentcompanies",
+                    "relLayerId": "Companies",
+                    "relType": "one-to-many",
+                    "keyField": "PAREF",
+                    "foreignKeyField": "PAREF",
+                    "modifyValues": false,
+                    "modifyActions": [],
+                    "description": "This relationship will select all related companies for each PA"
+                },
+                {
+                    "name": "pa-to-pa-amend",
+                    "relLayerId": "PA_Amended",
+                    "relType": "one-to-one",
+                    "keyField": "PAREF",
+                    "foreignKeyField": "PAREF",
+                    "modifyValues": true,
+                    "modifyActions": [
+                        {
+                            "type": "appendValues",
+                            "appendColumns": [
+                                {
+                                    "sourceColumn": "PA_twoYearIncreaseInSalesTND",
+                                    "appendValColumns": [
+                                        "expected_Aditional_inc_sales_20",
+                                        "expected_inc_sales_2020"
+                                    ]
+                                },
+                                {
+                                    "sourceColumn": "PA_jobsTBcreated_2020",
+                                    "appendValColumns": [
+                                        "expected_additional_job_created"
+                                    ]
+                                },
+                                {
+                                    "sourceColumn": "PA_threeYearIncreaseInSalesTND",
+                                    "appendValColumns": [
+                                        "expected_Aditional_inc_sales_21",
+                                        "expected_inc_sales_2021"
+                                    ]
+                                },
+                                {
+                                    "sourceColumn": "PA_jobsTBcreated_2021",
+                                    "appendValColumns": []
+                                },
+                                {
+                                    "sourceColumn": "PA_2022IncreaseInSalesTND",
+                                    "appendValColumns": [
+                                        "expected_Aditional_inc_sales_22",
+                                        "expected_inc_sales_2022"
+                                    ]
+                                },
+                                {
+                                    "sourceColumn": "PA_twoYearNewEmp",
+                                    "appendValColumns": [
+                                        "expected_additional_job_created"
+                                    ]
+                                },
+                                {
+                                    "sourceColumn": "PA_threeYearNewEmp",
+                                    "appendValColumns": [
+                                        "expected_additional_job_created_1"
+                                    ]
+                                },
+                                {
+                                    "sourceColumn": "PA_2022NewEmp",
+                                    "appendValColumns": [
+                                        "expected_additional_job_created_2"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "description": "This relationship will select all related companies for each PA"
+                }
+            ]
+        },
+        {
+            "layerId": "PA_Amended",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/12",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": "Companies",
+            "relationshipInfos": [
+                {
+                    "name": "paa-parentcompany",
+                    "relLayerId": "Companies",
+                    "relType": "one-to-one",
+                    "keyField": "CompanyId",
+                    "foreignKeyField": "objectid",
+                    "modifyValues": true,
+                    "modifyActions": [
+                        {
+                            "type": "replace",
+                            "findString": "PA-",
+                            "replaceWith": "",
+                            "sourceColumn": "PAREF",
+                            "newForeignKeyField": "CompanyId"
+                        }
+                    ],
+                    "description": "Need to strip away 'PAREF-' from value to get to parent company"
+                },
+                {
+                    "name": "paa-company-gouv",
+                    "relLayerId": "Companies",
+                    "relType": "one-to-one",
+                    "keyField": "CompanyId",
+                    "foreignKeyField": "objectid",
+                    "modifyValues": true,
+                    "modifyActions": [
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "COMP_GOUV",
+                            "newColumn": "COMP_GOUV"
+                        },
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "Comp_sector_New",
+                            "newColumn": "Comp_sector_New"
+                        },
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "firmGender",
+                            "newColumn": "firmGender"
+                        },
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "Total_Number_Employees",
+                            "newColumn": "Total_Number_Employees"
+                        }
+                    ],
+                    "description": "Need to strip away 'PAREF-' from value to get to parent company"
+                },
+                {
+                    "name": "paa-parentcompanies",
+                    "relLayerId": "Companies",
+                    "relType": "one-to-many",
+                    "keyField": "PAREF",
+                    "foreignKeyField": "PAREF",
+                    "modifyValues": false,
+                    "modifyActions": [],
+                    "description": "This relationship will select all related companies for each PA"
+                }
+            ]
+        },
+        {
+            "layerId": "TechnichalAssistance",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/8",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": "Companies",
+            "relationshipInfos": [
+                {
+                    "name": "ta-parentcompanies",
+                    "relType": "one-to-many",
+                    "keyField": "globalid",
+                    "foreignKeyField": "ParentGUID",
+                    "modifyValues": false,
+                    "modifyActions": [],
+                    "description": "This relationship will select all related companies for each PA"
+                }
+            ]
+        },
+        {
+            "layerId": "Access_To_Finance",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/9",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": "Companies",
+            "relationshipInfos": [
+                {
+                    "name": "atf-parentcompanies",
+                    "relType": "one-to-many",
+                    "keyField": "globalid",
+                    "foreignKeyField": "REL_GlobalID",
+                    "modifyValues": false,
+                    "modifyActions": [],
+                    "description": "This relationship will select all related companies for each PA"
+                }
+            ]
+        },
+        {
+            "layerId": "Hiring_List_New_Employees",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/1",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": "Companies",
+            "relationshipInfos": [
+                {
+                    "name": "hl-parentcompanies",
+                    "relType": "one-to-many",
+                    "keyField": "globalid",
+                    "foreignKeyField": "Parent_GUID",
+                    "modifyValues": false,
+                    "modifyActions": [],
+                    "description": "This relationship will select all related companies for each PA"
+                }
+            ]
+        },
+        {
+            "layerId": "New_Sales",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/3",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": "Companies",
+            "relationshipInfos": [
+                {
+                    "name": "ta-parentcompanies",
+                    "relType": "one-to-many",
+                    "keyField": "globalid",
+                    "foreignKeyField": "parentglobalid",
+                    "modifyValues": false,
+                    "modifyActions": [],
+                    "description": "This relationship will select all related companies for each PA"
+                }
+            ]
+        },
+        {
+            "layerId": "Hiring_List_Recap",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/2",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": "Companies",
+            "relationshipInfos": [
+                {
+                    "name": "hlr-parentcompanies",
+                    "relType": "one-to-many",
+                    "keyField": "globalid",
+                    "foreignKeyField": "Parent_GUID",
+                    "modifyValues": false,
+                    "modifyActions": [],
+                    "description": "This relationship will select all related companies for each PA"
+                }
+            ]
+        },
+        {
+            "layerId": "PreFeasibility_Assessment",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/5",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": "Companies",
+            "relationshipInfos": [
+                {
+                    "name": "pfa-parentcompany",
+                    "relType": "one-to-one",
+                    "keyField": "PFAREF",
+                    "foreignKeyField": "PFAREF",
+                    "modifyValues": true,
+                    "modifyActions": [
+                        {
+                            "type": "replace",
+                            "findString": "PFA-",
+                            "replaceWith": "",
+                            "sourceColumn": "PFAREF",
+                            "newForeignKeyField": "CompanyId"
+                        }
+                    ],
+                    "description": "Need to strip away 'PFAREF-' from value to get to parent company"
+                },
+                {
+                    "name": "pfa-company-gouv",
+                    "relType": "one-to-one",
+                    "keyField": "CompanyId",
+                    "foreignKeyField": "objectid",
+                    "modifyValues": true,
+                    "modifyActions": [
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "COMP_GOUV",
+                            "newColumn": "COMP_GOUV"
+                        }
+                    ],
+                    "description": "Need to strip away 'PAREF-' from value to get to parent company"
+                },
+                {
+                    "name": "pfa-to-pa",
+                    "relLayerId": "Companies",
+                    "relType": "many-to-one",
+                    "keyField": "CompanyId",
+                    "foreignKeyField": "CompanyId",
+                    "modifyValues": true,
+                    "modifyActions": [
+                        {
+                            "type": "addColumn",
+                            "sourceColumn": "PA_signatureDate",
+                            "newColumn": "PA_signatureDate"
+                        }
+                    ],
+                    "description": "This relationship will select all related companies for each PA"
+                },
+                {
+                    "name": "pfa-parentcompanies",
+                    "relType": "one-to-many",
+                    "keyField": "PFAREF",
+                    "foreignKeyField": "PFAREF",
+                    "modifyValues": false,
+                    "modifyActions": [],
+                    "description": "This relationship will select all related companies for each PA"
+                }
+            ]
+        },
+        {
+            "layerId": "Problems_Solutions_Actions_Costs",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/7",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": "Partnership_Agreement",
+            "relationshipInfos": [
+                {
+                    "name": "psac-parentcompany",
+                    "relType": "one-to-one",
+                    "keyField": "globalid",
+                    "foreignKeyField": "parentglobalid",
+                    "modifyValues": false,
+                    "modifyActions": [],
+                    "description": "Links back to PA"
+                }
+            ]
+        },
+        {
+            "layerId": "Foreign_Direct_Investment",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/11",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": "Companies",
+            "relationshipInfos": [
+                {
+                    "name": "fdi-parentcompanies",
+                    "relType": "one-to-many",
+                    "keyField": "globalid",
+                    "foreignKeyField": "REL_GlobalID",
+                    "modifyValues": false,
+                    "modifyActions": [],
+                    "description": "This relationship will select all related companies for each PA"
+                }
+            ]
+        },
+        {
+            "layerId": "Policy",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/C3_Dashboard_QA/FeatureServer/0",
+            "type": "featureLayer",
+            "preFilter": "1=1",
+            "relLayerId": null,
+            "relationshipInfos": []
+        },
+        {
+            "layerId": "Users",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/User_IDs/FeatureServer/0",
+            "type": "featureLayer",
+            "preFilter": "1=1",
+            "relLayerId": null,
+            "relationshipInfos": []
+        },
+        {
+            "layerId": "Grants",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/arcgis/rest/services/JOBS_Grants_20210916/FeatureServer/0",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": null,
+            "relationshipInfos": []
+        },
+        {
+            "layerId": "ATF",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/ATF_with_MFI_Grants/FeatureServer/0",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": null,
+            "relationshipInfos": []
+        },
+        {
+            "layerId": "Settings",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/DashboardVariables/FeatureServer/0",
+            "type": "featureTable",
+            "preFilter": "1=1",
+            "relLayerId": null,
+            "relationshipInfos": []
+        }
+    ]
+}
