@@ -1,0 +1,56 @@
+{
+    "emails": [
+        {
+            "action": "COP_VALIDATION_YES",
+            "userGroups": [
+                {
+                    "group": "creator",
+                    "subject": "PA Validation",
+                    "userIdQuery": "ArcUserName = {createdBy}",
+                    "body": "The PA for the company {firmName} uploaded by you under the reference {paref} is signed by COP/DCOP.<br/> Please click this link to upload documents and proceed further https://arcgis.tunisiajobs.org/c1/main/BA"
+                },
+                {
+                    "group": "supervisor",
+                    "subject": "PA Validation",
+                    "userIdQuery": "ArcUserName = {createdBy}",
+                    "body": "The PA for the company {firmName} uploaded by the BA {createdBy} under the reference {paref} is signed by the COP/DCOP<br/> Please click this link to review it https://arcgis.tunisiajobs.org/c1/main/TL"
+                },
+                {
+                    "group": "melteam",
+                    "subject": "PA Validation",
+                    "userIdQuery": "UserGroup = 'MEL Director' or UserGroup = 'MEL Specialist'",
+                    "body": "The PA for the company {firmName} uploaded by the BA {createdBy} under the reference {paref} is signed by the COP/DCOP<br/> Please click this link to review it https://arcgis.tunisiajobs.org/c1/main/TL"
+                },
+                {
+                    "group": "moderator",
+                    "subject": "PA Validation",
+                    "userIdQuery": "UserGroup = 'Moderator' or UserGroup = 'Moderator_1'",
+                    "body": "The PA for the company {firmName} uploaded by the BA {createdBy} under the reference {paref} is signed by COP/DCOP."
+                }
+            ]
+        },
+        {
+            "action": "COP_VALIDATION_NO",
+            "userGroups": [
+                {
+                    "group": "supervisor",
+                    "subject": "PA Validation",
+                    "userIdQuery": "ArcUserName = {createdBy}",
+                    "body": "The PA for the company {firmName} uploaded by the BA {createdBy} under the reference {paref} is not validated by the COP/DCOP.<br/> Please click this link to review it https://arcgis.tunisiajobs.org/c1/main/TL"
+                },
+                {
+                    "group": "melteam",
+                    "subject": "PA Validation",
+                    "userIdQuery": "UserGroup = 'MEL Director' or UserGroup = 'MEL Specialist'",
+                    "body": "The PA for the company {firmName} uploaded by the BA {createdBy} under the reference {paref} is not validated by the COP/DCOP.<br/> Please click this link to review it https://arcgis.tunisiajobs.org/c1/main/MEL"
+                },
+                {
+                    "group": "moderator",
+                    "subject": "PA Validation",
+                    "userIdQuery": "UserGroup = 'Moderator' or UserGroup = 'Moderator_1'",
+                    "body": "The PA for the company {firmName} uploaded by the BA {createdBy} under the reference {paref} is not validated by the COP/DCOP."
+                }
+            ]
+        }
+    ]
+}

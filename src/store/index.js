@@ -8,6 +8,7 @@ export default new Vuex.Store({
     esriCred: null,
     esriCredLoading: true,
     isPublic: false,
+
   },
   mutations: {
     setEsriCred(state, payload) {

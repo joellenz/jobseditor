@@ -2,7 +2,7 @@
   <v-app>
     <Header />
     <Footer />
-    <router-view></router-view>
+    <router-view :key="$route.path"></router-view>
   </v-app>
 </template>
 
@@ -105,5 +105,18 @@ export default {
   height: calc(100vh - 100px);
   max-height: calc(100vh - 90px);
   border: #42b983;
+}
+.prop-table {
+  width: 100%;
+}
+.prop-alias {
+  font-weight: bold;
+  width: 40%;
+  vertical-align: baseline;
+}
+.prop-value {
+  align-content: left;
+  width: 60%;
+  vertical-align: baseline;
 }
 </style>

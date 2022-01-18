@@ -1,13 +1,14 @@
 {
     "database": {
         "name": "tunisiajobs_c1_rep",
-        "layerId": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/",
+        "layerId": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/",
         "env": ""
     },
     "datasources": [
         {
             "layerId": "Companies",
-            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/0",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/0",
+            "objectIdField": "objectid",
             "type": "featureLayer",
             "preFilter": "1=1",
             "relLayerId": null,
@@ -58,7 +59,8 @@
         },
         {
             "layerId": "Partnership_Agreement",
-            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/4",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/4",
+            "objectIdField": "objectid",
             "type": "featureTable",
             "preFilter": "PA_signatureDate <> null",
             "relLayerId": "Companies",
@@ -191,7 +193,7 @@
         },
         {
             "layerId": "PA_Amended",
-            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/12",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/12",
             "type": "featureTable",
             "preFilter": "1=1",
             "relLayerId": "Companies",
@@ -259,7 +261,7 @@
         },
         {
             "layerId": "TechnichalAssistance",
-            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/8",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/8",
             "type": "featureTable",
             "preFilter": "1=1",
             "relLayerId": "Companies",
@@ -277,7 +279,7 @@
         },
         {
             "layerId": "Access_To_Finance",
-            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/9",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/9",
             "type": "featureTable",
             "preFilter": "1=1",
             "relLayerId": "Companies",
@@ -295,7 +297,7 @@
         },
         {
             "layerId": "Hiring_List_New_Employees",
-            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/1",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/1",
             "type": "featureTable",
             "preFilter": "1=1",
             "relLayerId": "Companies",
@@ -313,7 +315,7 @@
         },
         {
             "layerId": "New_Sales",
-            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/3",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/3",
             "type": "featureTable",
             "preFilter": "1=1",
             "relLayerId": "Companies",
@@ -331,7 +333,7 @@
         },
         {
             "layerId": "Hiring_List_Recap",
-            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/2",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/2",
             "type": "featureTable",
             "preFilter": "1=1",
             "relLayerId": "Companies",
@@ -349,7 +351,7 @@
         },
         {
             "layerId": "PreFeasibility_Assessment",
-            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/5",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/5",
             "type": "featureTable",
             "preFilter": "1=1",
             "relLayerId": "Companies",
@@ -415,7 +417,7 @@
         },
         {
             "layerId": "Problems_Solutions_Actions_Costs",
-            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/7",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/7",
             "type": "featureTable",
             "preFilter": "1=1",
             "relLayerId": "Partnership_Agreement",
@@ -433,7 +435,7 @@
         },
         {
             "layerId": "Foreign_Direct_Investment",
-            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_prd/FeatureServer/11",
+            "url": "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/tunisiajobs_c1_qa2/FeatureServer/11",
             "type": "featureTable",
             "preFilter": "1=1",
             "relLayerId": "Companies",

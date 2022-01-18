@@ -71,45 +71,19 @@ export default {
           };
           let flayer = new FeatureLayer({
             // URL to the service
+            id: layer.name,
             title: layer.title,
             url: layer.url,
             definitionExpression: layer.filter,
             visible: true,
             renderer: renderer,
           });
-          console.log(flayer);
+          //console.log(flayer);
           map.add(flayer);
-          mapView
-            .whenLayerView(flayer)
-            .then(function (layerView) {
-              // The layerview for the layer
-
-              if (layer.featureFilter) {
-                console.log(layer.featureFilter);
-                let q = new Query({
-                  where: layer.featureFilter,
-                });
-                return flayer.queryExtent(q).then((response) => {
-                  let newExtent = new Extent({
-                    xmin: response.extent.xmin - 400,
-                    ymin: response.extent.ymin - 400,
-                    xmax: response.extent.xmax + 400,
-                    ymax: response.extent.ymax + 400,
-                    spatialReference: flayer.spatialReference,
-                  });
-                  console.log(newExtent);
-                  mapView.goTo(newExtent).catch((error) => {
-                    console.error(error);
-                  });
-                });
-              }
-            })
-            .catch(function (error) {
-              // An error occurred during the layerview creation
-            });
         }
       });
-
+      mapView.center = this.centerPoint;
+      mapView.zoom = this.lod;
       mapView.when((res) => {
         console.log(res);
         map.layers.add(mapComponent.graphicsLayer);
@@ -141,10 +115,31 @@ export default {
           view: mapView,
         });
         mapView.ui.add(legend, "bottom-right");
+        mapView.on("layerview-create", function (event) {
+          if (event.layer.loadStatus === "loaded") {
+            console.log("Layer view created!", event.layer);
+            mapComponent.layersInfo.info.layers.forEach((clayer) => {
+              if (event.layer.id === clayer.name) {
+                if (clayer.featureFilter) {
+                  console.log("Layer Query", clayer.featureFilter);
+                  let query = event.layer.createQuery();
+                  query.where = clayer.featureFilter;
+                  query.outFields = ["*"];
+                  event.layer.queryFeatures(query).then(function (response) {
+                    let pt = response.features[0].geometry;
+                    console.log("Selected Geomtry", pt);
+                    mapView.goTo({ target: pt, zoom: 15 }).catch((error) => {
+                      if (error.name != "AbortError") {
+                        console.error(error);
+                      }
+                    });
+                  });
+                }
+              }
+            });
+          }
+        });
       });
-
-      mapView.center = this.centerPoint;
-      mapView.zoom = this.lod;
     },
   },
   computed: {},
