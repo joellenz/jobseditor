@@ -463,6 +463,66 @@
                             "editable": false
                         },
                         {
+                            "name": "PA_jobsTBcreated",
+                            "alias": "Jobs to be Created 2019",
+                            "display": true,
+                            "editable": false
+                        },
+                        {
+                            "name": "PA_jobsTBmatched",
+                            "alias": "Jobs to be Matched 2019",
+                            "display": true,
+                            "editable": false
+                        },
+                        {
+                            "name": "PA_jobsTBcreated_2020",
+                            "alias": "Jobs to be Created 2020",
+                            "display": true,
+                            "editable": false
+                        },
+                        {
+                            "name": "PA_jobsTBmatched_2020",
+                            "alias": "Jobs to be Matched 2020",
+                            "display": true,
+                            "editable": false
+                        },
+                        {
+                            "name": "PA_jobsTBcreated_2021",
+                            "alias": "Jobs to be Created 2021",
+                            "display": true,
+                            "editable": false
+                        },
+                        {
+                            "name": "PA_jobsTBmatched_2021",
+                            "alias": "Jobs to be Matched 2021",
+                            "display": true,
+                            "editable": false
+                        },
+                        {
+                            "name": "PA_jobsTBcreated_2022",
+                            "alias": "Jobs to be Created 2022",
+                            "display": true,
+                            "editable": false
+                        },
+                        {
+                            "name": "PA_jobsTBmatched_2022",
+                            "alias": "Jobs to be Matched 2022",
+                            "display": true,
+                            "editable": false
+                        },
+                        {
+                            "name": "PA_jobsTBcreated_2023",
+                            "alias": "Jobs to be Created 2023",
+                            "display": true,
+                            "editable": false
+                        },
+                        {
+                            "name": "PA_jobsTBmatched_2023",
+                            "alias": "Jobs to be Matched 2023",
+                            "display": true,
+                            "editable": false
+                        },
+                        {
                             "name": "PA_nextYearNewEmp",
                             "alias": "2019 New Employees",
                             "display": true,
@@ -609,66 +669,6 @@
                         {
                             "name": "PA_2023NonProfMale",
                             "alias": "2023 Non-Professional Male",
-                            "display": true,
-                            "editable": false
-                        },
-                        {
-                            "name": "PA_jobsTBcreated",
-                            "alias": "Jobs to be Created 2019",
-                            "display": true,
-                            "editable": false
-                        },
-                        {
-                            "name": "PA_jobsTBmatched",
-                            "alias": "Jobs to be Matched 2019",
-                            "display": true,
-                            "editable": false
-                        },
-                        {
-                            "name": "PA_jobsTBcreated_2020",
-                            "alias": "Jobs to be Created 2020",
-                            "display": true,
-                            "editable": false
-                        },
-                        {
-                            "name": "PA_jobsTBmatched_2020",
-                            "alias": "Jobs to be Matched 2020",
-                            "display": true,
-                            "editable": false
-                        },
-                        {
-                            "name": "PA_jobsTBcreated_2021",
-                            "alias": "Jobs to be Created 2021",
-                            "display": true,
-                            "editable": false
-                        },
-                        {
-                            "name": "PA_jobsTBmatched_2021",
-                            "alias": "Jobs to be Matched 2021",
-                            "display": true,
-                            "editable": false
-                        },
-                        {
-                            "name": "PA_jobsTBcreated_2022",
-                            "alias": "Jobs to be Created 2022",
-                            "display": true,
-                            "editable": false
-                        },
-                        {
-                            "name": "PA_jobsTBmatched_2022",
-                            "alias": "Jobs to be Matched 2022",
-                            "display": true,
-                            "editable": false
-                        },
-                        {
-                            "name": "PA_jobsTBcreated_2023",
-                            "alias": "Jobs to be Created 2023",
-                            "display": true,
-                            "editable": false
-                        },
-                        {
-                            "name": "PA_jobsTBmatched_2023",
-                            "alias": "Jobs to be Matched 2023",
                             "display": true,
                             "editable": false
                         }

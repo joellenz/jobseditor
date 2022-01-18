@@ -1,5 +1,10 @@
 <template>
   <div>
+    <Confirmation
+      v-model="showDialog"
+      :title="confirmTitle"
+      :confirmMessage="confirmMessage"
+    />
     <v-row>
       <v-col md="6">
         <h1>COP PA Validation</h1>
@@ -54,7 +59,7 @@
                         v-model="copComments"
                       ></v-textarea>
 
-                      <v-btn primary @click="applyValidation()">Apply</v-btn>
+                      <v-btn primary @click="confirmEdits()">Apply</v-btn>
                       <template v-if="actionResults">
                         {{ actionResults.message }}
                       </template>
@@ -104,13 +109,18 @@ import CompanyInfo from "@/components/ESRIHelpers/CompanyInfo.vue";
 import PAInfo from "@/components/ESRIHelpers/PAInfo.vue";
 import queryHelper from "@/assets/scripts/QueryHelper.js";
 
+import confirmation from "@/components/Dialogs/Confirmation.vue";
 //Config
 import emailConfig from "@/assets/config/email.json";
 import database from "@/assets/config/database.json";
+import Confirmation from "../components/Dialogs/Confirmation.vue";
 export default {
   name: "COP",
-  components: { Map, CompanyInfo, PAInfo },
+  components: { Map, CompanyInfo, PAInfo, Confirmation },
   data: () => ({
+    showDialog: false,
+    confirmTitle: "Dialog Title",
+    confirmMessage: {},
     column: null,
     row: null,
     tab: null,
@@ -294,7 +304,16 @@ export default {
     loadAllCOP() {
       //update filters to select companies/PAs in review that are waiting for Team Lead
     },
-    applyValidation() {
+    confirmEdits() {
+      this.confirmTitle = "Apply Validation";
+      this.confirmMessage.message =
+        "Confirm that you wish to modify the validation of " + this.paref;
+      this.showDialog = true;
+    },
+    applyValidation(doEdits) {
+      if (!doEdits) {
+        return;
+      }
       let companyDataInfos = database.datasources.find((obj) => {
         return obj.layerId === "Companies";
       });
@@ -336,6 +355,7 @@ export default {
           thisApp.actionResults.push({
             message: "Company updates completed successfully",
           });
+          thisApp.$router.go();
           thisApp.applyPAEdits(paDataInfos, copObject, (paEditResponse) => {
             if (paEditResponse.success) {
               thisApp.sendEmail(emailInfos, (emailResponse) => {
@@ -436,7 +456,11 @@ export default {
     headerFields() {},
     actionResults() {},
   },
-  mounted() {},
+  mounted() {
+    this.$root.$on("doEdits", (doEdits) => {
+      return this.applyValidation(doEdits);
+    });
+  },
 };
 </script>
 <style>
