@@ -37,9 +37,12 @@
 
             <v-tab-item
               ><div class="max-height-tab-conents">
-                <v-row no-gutters>
+                <v-row>
                   <v-col md="6" offset="3" justify>
-                    <v-card>
+                    <v-card
+                      elevation="4"
+                      style="margin-top: 25px; padding: 10px"
+                    >
                       <v-row>
                         <v-col md="4"> PA Validated: </v-col>
                         <v-col md="8">

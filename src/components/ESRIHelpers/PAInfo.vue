@@ -1,33 +1,37 @@
 <template>
   <div>
     <v-row justify="center">
-      <v-expansion-panels v-model="panel" accordion>
-        <v-expansion-panel>
-          <v-expansion-panel-header
-            >Partnership Agreement Attachments</v-expansion-panel-header
-          >
-          <v-expansion-panel-content>
-            <Attachments
-              v-if="objectid"
-              :url="attachmentUrl"
-              :objectid="objectid"
-            />
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-        <v-expansion-panel v-for="(group, g) in paGroups" :key="g">
-          <v-expansion-panel-header>{{ group.title }}</v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <table class="prop-table">
-              <tr v-for="(info, i) in group.columns" :key="i">
-                <td align="right" class="prop-alias">{{ info.alias }}:</td>
-                <td align="left" class="prop-value">
-                  {{ info.value }}
-                </td>
-              </tr>
-            </table>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
+      <v-col md="12">
+        <v-expansion-panels v-model="panel" accordion>
+          <v-expansion-panel>
+            <v-expansion-panel-header
+              >Partnership Agreement Attachments</v-expansion-panel-header
+            >
+            <v-expansion-panel-content>
+              <Attachments
+                v-if="objectid"
+                :url="attachmentUrl"
+                :objectid="objectid"
+              />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <v-expansion-panel v-for="(group, g) in paGroups" :key="g">
+            <v-expansion-panel-header>{{
+              group.title
+            }}</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <table class="prop-table">
+                <tr v-for="(info, i) in group.columns" :key="i">
+                  <td align="right" class="prop-alias">{{ info.alias }}:</td>
+                  <td align="left" class="prop-value">
+                    {{ info.value }}
+                  </td>
+                </tr>
+              </table>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-col>
     </v-row>
   </div>
 </template>
