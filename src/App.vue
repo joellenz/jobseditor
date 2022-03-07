@@ -33,9 +33,9 @@ export default {
       //alert("Login");
       let vStore = this.$store;
       const main = this;
-      const appId = "zxW6Xu6gM1DqIBcp";
+      const appId = "MJB8m8sDLBtbTa6C";
       const portalUrl = "https://tunisiajobs.maps.arcgis.com";
-      const appItemId = "83649de6d4514c30b79ef7391ee1b745";
+      const appItemId = "8f4e5903b05d4207aac9df06ee5a5486";
 
       const info = new OAuthInfo({
         appId: appId,

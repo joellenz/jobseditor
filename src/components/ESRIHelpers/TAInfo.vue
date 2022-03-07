@@ -94,7 +94,7 @@
             >
           </template>
           <template v-else>
-            <h3>No TAs for the selected company"</h3>
+            <h3>Loading...</h3>
           </template>
         </v-col>
         <v-divider vertical></v-divider>
