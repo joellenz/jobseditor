@@ -136,7 +136,7 @@ export default {
     layerInfos: null,
     editFeatures: [],
     headerFields: [],
-    validatedGroup: null,
+    validatedGroup: "No",
     copComments: "",
     actionResults: [],
   }),

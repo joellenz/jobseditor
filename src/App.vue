@@ -80,6 +80,13 @@ export default {
             axioRequest.then((response) => {
               console.log(response);
               vStore.dispatch("setEsriCred", esriCred);
+              let userInfos = [];
+              response.data.features.forEach((userInfo) => {
+                userInfos.push(userInfo);
+              });
+
+              vStore.dispatch("setEsriCred", esriCred);
+              vStore.dispatch("setUserInfos", userInfos);
 
               //main.setTheme();
             });
@@ -105,6 +112,13 @@ export default {
   height: calc(100vh - 100px);
   max-height: calc(100vh - 90px);
   border: #42b983;
+}
+.editor-max-main-height-col {
+  height: calc(100vh - 400px);
+  max-height: calc(100vh - 400px);
+  border: #42b983;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .prop-table {
   width: 100%;

@@ -39,7 +39,7 @@ export default {
   }),
   methods: {
     initMap() {
-      console.log(this.layersInfo.info);
+      console.log("LAYERINFO", this.layersInfo.info);
       if (!this.graphicsLayer) {
         this.graphicsLayer = new GraphicsLayer({});
       }
@@ -85,7 +85,6 @@ export default {
       mapView.center = this.centerPoint;
       mapView.zoom = this.lod;
       mapView.when((res) => {
-        console.log(res);
         map.layers.add(mapComponent.graphicsLayer);
         const homeWidget = new Home({
           view: mapView,
@@ -120,7 +119,7 @@ export default {
             console.log("Layer view created!", event.layer);
             mapComponent.layersInfo.info.layers.forEach((clayer) => {
               if (event.layer.id === clayer.name) {
-                if (clayer.featureFilter) {
+                if (clayer.featureFilter !== null) {
                   console.log("Layer Query", clayer.featureFilter);
                   let query = event.layer.createQuery();
                   query.where = clayer.featureFilter;

@@ -1,37 +1,27 @@
 <template>
   <div>
     <v-row justify="center">
-      <v-expansion-panels v-model="panel" accordion>
-        <v-expansion-panel>
-          <v-expansion-panel-header
-            >Company Attachments</v-expansion-panel-header
-          >
-          <v-expansion-panel-content>
-            <Attachments
-              v-if="objectid"
-              :url="attachmentUrl"
-              :objectid="objectid"
-            />
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-        <v-expansion-panel>
-          <v-expansion-panel-header
-            >Company Information</v-expansion-panel-header
-          >
-          <v-expansion-panel-content>
-            <template v-if="selectedCompany">
-              <table class="prop-table">
-                <tr v-for="(info, i) in companyInfos" :key="i">
-                  <td align="right" class="prop-alias">{{ info.alias }}:</td>
-                  <td align="left" class="prop-value">
-                    {{ info.value }}
-                  </td>
-                </tr>
-              </table>
-            </template>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
+      <v-col md="6">
+        <h3>Company Information</h3>
+        <template v-if="selectedCompany">
+          <table class="prop-table">
+            <tr v-for="(info, i) in companyInfos" :key="i">
+              <td align="right" class="prop-alias">{{ info.alias }}:</td>
+              <td align="left" class="prop-value">
+                {{ info.value }}
+              </td>
+            </tr>
+          </table>
+        </template>
+      </v-col>
+      <v-col md="6">
+        <h3>Company Attachments</h3>
+        <Attachments
+          v-if="objectid"
+          :url="attachmentUrl"
+          :objectid="objectid"
+        />
+      </v-col>
     </v-row>
   </div>
 </template>

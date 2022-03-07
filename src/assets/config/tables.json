@@ -1,5 +1,6 @@
 {
-    "tables": [{
+    "tables": [
+        {
             "name": "company_table",
             "title": "Company Details",
             "key": "firmName",
@@ -15,7 +16,8 @@
             "linkColumns": [
                 "firmWeb"
             ],
-            "headers": [{
+            "headers": [
+                {
                     "name": "action",
                     "alias": "Actions",
                     "format": {},
@@ -34,8 +36,14 @@
                     "isPublic": true
                 },
                 {
-                    "name": "Comp_sector_New",
-                    "alias": "Company Sector",
+                    "name": "PAREF",
+                    "alias": "PAREF",
+                    "format": {},
+                    "isPublic": true
+                },
+                {
+                    "name": "objectid",
+                    "alias": "Company ID",
                     "format": {},
                     "isPublic": true
                 }
@@ -66,7 +74,8 @@
             ],
             "videoColumns": [],
             "linkColumns": [],
-            "headers": [{
+            "headers": [
+                {
                     "name": "action",
                     "alias": "Zoom",
                     "format": {},
@@ -117,12 +126,22 @@
                         "isPublic": false
                     },
                     "modify": {
-                        "columns": [{ "column": "Type_Grant_Company", "value": "Beneficiary company" }, { "column": "Field8", "value": "MFI grants" }],
+                        "columns": [
+                            {
+                                "column": "Type_Grant_Company",
+                                "value": "Beneficiary company"
+                            },
+                            {
+                                "column": "Field8",
+                                "value": "MFI grants"
+                            }
+                        ],
                         "result": "NA"
                     }
                 }
             ],
-            "specialColumns": [{
+            "specialColumns": [
+                {
                     "name": "UsdGrantsValueRounded",
                     "alias": "Grant Value USD",
                     "format": {
@@ -165,7 +184,8 @@
             "storyMapColumns": [],
             "videoColumns": [],
             "linkColumns": [],
-            "headers": [{
+            "headers": [
+                {
                     "name": "action",
                     "alias": "Zoom",
                     "format": {},
@@ -224,7 +244,8 @@
             "storyMapColumns": [],
             "videoColumns": [],
             "linkColumns": [],
-            "headers": [{
+            "headers": [
+                {
                     "name": "action",
                     "alias": "Zoom",
                     "format": {},

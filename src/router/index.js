@@ -26,6 +26,30 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/COP.vue"),
   },
   {
+    path: "/grants/:id?",
+    name: "GRANTS",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Grants.vue"),
+  },
+  {
+    path: "/atf/:id?",
+    name: "ATF",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/ATF.vue"),
+  },
+  {
+    path: "/wfd/:id?",
+    name: "WFD",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/WFD.vue"),
+  },
+  {
+    path: "/ta/:comId?",
+    name: "TA",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/TA.vue"),
+  },
+  {
     path: "/about",
     name: "About",
     // route level code-splitting
