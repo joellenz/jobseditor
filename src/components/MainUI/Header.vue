@@ -11,7 +11,9 @@
         ></v-img>
       </router-link>
 
-      <v-app-bar-title color="jobselemblack">{{ appTitle }}</v-app-bar-title>
+      <v-app-bar-title color="jobselemblack text-no-wrap">{{
+        appTitle
+      }}</v-app-bar-title>
       <v-spacer></v-spacer>
 
       <h5><v-icon color="jobselemblack">mdi-account</v-icon>{{ userName }}</h5>
@@ -43,3 +45,8 @@ export default {
   mounted() {},
 };
 </script>
+<style>
+.v-app-bar-title__content {
+  width: 200px !important;
+}
+</style>

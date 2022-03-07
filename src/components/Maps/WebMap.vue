@@ -60,18 +60,10 @@ export default {
         mapView.popup.autoOpenEnabled = false;
         //mapView.on("pointer-move", _this.viewPointerMoveHandler);
 
-        if (_this.legend) {
-          //this.legend.layerInfos = [];
-          _this.legend.view = mapView;
-        } else {
-          _this.legend = new Legend(
-            {
-              view: mapView,
-            },
-            "map-legend"
-          );
-        }
-        //
+        _this.legend = new Legend({
+          view: mapView,
+        });
+        mapView.ui.add(_this.legend, "bottom-left");
       });
       mapView.center = this.centerPoint;
       mapView.zoom = this.lod;
@@ -225,7 +217,8 @@ export default {
               });
               tas.forEach((feature, i) => {
                 console.log(feature);
-                nodeName = feature.attributes.Type_of_Technical_Assistance;
+                nodeName =
+                  "TA: " + feature.attributes.Type_of_Technical_Assistance;
                 featureTree = {
                   id: feature.attributes[editObjects[0].objectIdField],
                   name: nodeName,
@@ -247,7 +240,9 @@ export default {
                   );
                 });
                 taps.forEach((tapFeature) => {
-                  nodeName = tapFeature.attributes.Consulting_Firm_Name;
+                  nodeName =
+                    "TA Provider: " +
+                    tapFeature.attributes.Consulting_Firm_Name;
                   children.push({
                     id: tapFeature.attributes[editObjects[1].objectIdField],
                     title: editObjects[1].title,

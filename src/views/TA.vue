@@ -443,6 +443,9 @@ export default {
     headerFields() {},
     actionResults() {},
   },
+  beforeDestroy() {
+    this.$root.$off("updateFeature");
+  },
   mounted() {
     this.$root.$on("doEdits", (doEdits) => {
       return this.applyValidation(doEdits);

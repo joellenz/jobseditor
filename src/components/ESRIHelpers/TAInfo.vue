@@ -455,6 +455,7 @@ export default {
       });
       console.log("RES", res);
       if (res) {
+        console.log("CALLINGUPDATEEMIT");
         this.$root.$emit("updateFeature", this.editObject, this.editFormStatus);
       }
     },
