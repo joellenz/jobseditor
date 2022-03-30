@@ -126,6 +126,10 @@ export default {
                 fieldInfo.recValue = null;
                 popupEdit.push(fieldInfo);
               } else {
+                console.log("FIELDINFO", fieldInfo);
+                if (fieldInfo.fieldName.toLowerCase().includes("date")) {
+                  fieldInfo.fieldType = "esriFieldTypeDate";
+                }
                 fieldInfo.recValue = null;
                 popupDisplay.push(fieldInfo);
               }
