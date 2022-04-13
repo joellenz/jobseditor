@@ -414,14 +414,15 @@ export default {
               formValue = codedValue.code;
             }
           }
-          console.log(editField.fieldName + ": " + element.value);
+          //console.log(editField.fieldName + ": " + element.value);
         } else {
           formValue = null;
-          console.log(editField.fieldName + " was not found");
+          //console.log(editField.fieldName + " was not found");
         }
         editAttributes[editField.fieldName] = formValue;
       });
       editAttributes.ParentGUID = this.editObject.ParentGUID;
+      //TODO: Add Config for Defaults like user, mel_validation...
       if (this.editFormStatus !== "new") {
         //add ObjectId
         editAttributes[this.editObject.objectIdField] =

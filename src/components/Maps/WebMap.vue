@@ -37,6 +37,7 @@ export default {
   }),
   methods: {
     initMap() {
+      //TODO: Add Map Click
       if (!this.graphicsLayer) {
         this.graphicsLayer = new GraphicsLayer({});
       }
