@@ -65,7 +65,31 @@
                       <v-btn primary @click="confirmEdits()">Apply</v-btn>
                       <template v-if="actionResults">
                         {{ actionResults.message }}
-                      </template>
+                      </template></v-card
+                    ></v-col
+                  ></v-row
+                >
+              </div></v-tab-item
+            ></v-tabs-items
+          ></template
+        ></v-col
+      ></v-row
+    >
+  </div>
+</template>
+
+</v-card
+                    ></v-col
+                  ></v-row
+                >
+              </div></v-tab-item
+            ></v-tabs-items
+          ></template
+        ></v-col
+      ></v-row
+    >
+  </div>
+</template>
                     </v-card>
                   </v-col>
                 </v-row>
@@ -73,27 +97,30 @@
             </v-tab-item>
           </v-tabs-items>
         </template>
-        <template v-if="!this.paref">
-          <div>
-            <h2>TL Validated PAs</h2>
-            <template v-if="editFeatures.length > 0">
-              <v-row no-gutters v-for="(feature, f) in editFeatures" :key="f">
-                <v-col v-for="(col, c) in headerFields" :key="c">
-                  <v-card>
-                    <v-btn
-                      depressed
-                      color="primary"
-                      @click="loadPAREF(feature.attributes[col.name])"
-                    >
-                      {{ feature.attributes[col.name] }}
-                    </v-btn>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </template>
-            <template v-if="editFeatures.length === 0">
-              <h3>There are no Validated PAs to review!</h3>
-            </template>
+
+<template v-if="!this.paref">
+    <div>
+        <h2>TL Validated PAs</h2>
+        <template v-if="editFeatures.length > 0">
+                      <v-row no-gutters v-for="(feature, f) in editFeatures" :key="f">
+                        <v-col v-for="(col, c) in headerFields" :key="c">
+                          <v-card>
+                            <v-btn
+                              depressed
+                              color="primary"
+                              @click="loadPAREF(feature.attributes[col.name])"
+                            >
+                              {{ feature.attributes[col.name] }}
+                            </v-btn>
+                          </v-card>
+                        </v-col>
+                      </v-row>
+</template>
+
+<template v-if="editFeatures.length === 0">
+    <h3>
+        There are no Validated PAs to review!</h3>
+</template>
           </div>
         </template>
       </v-col>
@@ -106,6 +133,7 @@
     </v-row>
   </div>
 </template>
+
 <script>
 import Map from "@/components/Maps/Map.vue";
 import CompanyInfo from "@/components/ESRIHelpers/CompanyInfo.vue";
@@ -466,6 +494,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .max-height-tab-conents {
   height: calc(100vh - 220px);
