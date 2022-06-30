@@ -51,6 +51,29 @@
                     "body": "The PA for the company {firmName} uploaded by the BA {createdBy} under the reference {paref} is not validated by the COP/DCOP."
                 }
             ]
+        },
+        {
+            "action": "TA_NEW",
+            "userGroups": [
+                {
+                    "group": null,
+                    "subject": "PA Validation",
+                    "userIdQuery": "ArcUserName = {createdBy}",
+                    "body": "The TA for the company {firmName} uploaded by the BA {createdBy} under the reference {paref} is not validated by the COP/DCOP.<br/> Please click this link to review it https://arcgis.tunisiajobs.org/c1/main/TL"
+                },
+                {
+                    "group": null,
+                    "subject": "PA Validation",
+                    "userIdQuery": "UserGroup = 'MEL Director' or UserGroup = 'MEL Specialist'",
+                    "body": "The PA for the company {firmName} uploaded by the BA {createdBy} under the reference {paref} is not validated by the COP/DCOP.<br/> Please click this link to review it https://arcgis.tunisiajobs.org/c1/main/MEL"
+                },
+                {
+                    "group": "TAC",
+                    "subject": "New Ta Entry",
+                    "userIdQuery": "UserGroup = 'TAC'",
+                    "body": "A new TA for the {firmName} uploaded by the BA {createdBy} has been created. Please review the TA using the following link: https://arcgis.tunisiajobs.org/QA/JOBSEditor/ta/{companyid}"
+                }
+            ]
         }
     ]
 }

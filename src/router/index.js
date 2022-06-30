@@ -19,12 +19,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Editor.vue"),
   },
-  {
-    path: "/cop/:paref?",
-    name: "COP",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/COP.vue"),
-  },
+  // {
+  //   path: "/cop/:paref?",
+  //   name: "COP",
+  //   component: () =>
+  //     import(/* webpackChunkName: "about" */ "../views/COP.vue"),
+  // },
   {
     path: "/grants/:id?",
     name: "GRANTS",

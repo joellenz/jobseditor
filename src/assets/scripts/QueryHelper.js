@@ -75,6 +75,7 @@ export default {
         url.search = new URLSearchParams(params).toString();
         let axioRequest = axios.get(url);
         axioRequest.then((response) => {
+            console.log(response)
             callback(response.data.features)
         })
     },
@@ -154,6 +155,74 @@ export default {
 
             callback(editResponse);
         });
-    }
+    },
+    sendEmail(emailInfos, callback) {
+        console.log("Email Infos", emailInfos);
+        let retVal = {
+            message: "Emails Sent",
+        };
+        let urlWS = "https://arcgis.tunisiajobs.org/jobsapi/api/email/SendEmail";
+
+
+        //Get Users to email
+        console.log("USERWHERE", emailInfos.userIdQuery)
+        let dataInfos = {
+            url: "https://services9.arcgis.com/sdlGgCbKFs6IzpbE/ArcGIS/rest/services/User_IDs/FeatureServer/0",
+            where: emailInfos.userIdQuery,
+            fields: ["*"]
+        }
+        this.doAxiosGet(dataInfos, (users) => {
+            let axioRequests = []
+            console.log(users)
+            users.forEach(user => {
+                let data = {
+                    email_config: {
+                        user_name: user.attributes.ArcUserName,
+                        Body: emailInfos.body,
+                    },
+                };
+                let aRequest = axios.post(urlWS, data).then((response) => {
+                    console.log("Email Response", response);
+                    //callback(response);
+                });
+                axioRequests.push(aRequest)
+            })
+            axios.all(axioRequests).then(axios.spread((...responses) => {
+                callback(retVal);
+
+            }))
+
+
+        })
+
+
+
+
+        // var data = {
+        //   email_config: {
+        //     user_name: created_by,
+        //     Body: `The PA for the company ${companyName} uploaded by you under the reference ${feature.attributes.PAREF} is signed by COP/DCOP.<br/> Please click this link to upload documents and proceed further https://arcgis.tunisiajobs.org/c1/main/BA`,
+        //   },
+        // };
+        // var urlWS = "https://arcgis.tunisiajobs.org/jobsapi/api/email/SendEmail";
+        // var promise = request
+        //   .post(urlWS, {
+        //     data: JSON.stringify(data),
+        //     method: "POST",
+        //     handleAs: "json",
+        //     headers: {
+        //       "X-Requested-With": null,
+        //       "Content-Type": "application/json;charset=UTF-8",
+        //     },
+        //   })
+        //   .then(
+        //     lang.hitch(this, function (response) {
+        //       console.log(response);
+        //     }),
+        //     lang.hitch(this, function (error) {
+        //       console.log("---error", error);
+        //     })
+        //   );
+    },
 
 }

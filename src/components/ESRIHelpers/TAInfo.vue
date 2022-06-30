@@ -3,14 +3,23 @@
     <h3 v-if="companyInfo !== null">
       {{ companyInfo.attributes.firmName }} - Technical Assitance
     </h3>
-    <h4 v-if="userRole === 'creator'">Create and Edit Technical Assitance</h4>
-    <h4 v-if="userRole === 'validator'">Validate Technical Assitance</h4>
-    <h4 v-if="userRole === 'viewer'">View only role</h4>
-    <h5>User Role: {{ userRole }}</h5>
+    <h4 v-if="userInfo.userRole === 'creator'">
+      Create and Edit Technical Assitance
+    </h4>
+    <h4 v-if="userInfo.userRole === 'validator'">
+      Validate Technical Assitance
+    </h4>
+    <h4 v-if="userInfo.userRole === 'viewer'">View only role</h4>
+    <h5>User Role: {{ userInfo.userGroup }}</h5>
     <br />
     <template>
       <div class="head-btns">
-        <v-btn @click="newTA()" class="primary">Create New TA</v-btn>
+        <v-btn
+          v-if="userInfo.userRole === 'creator'"
+          @click="newTA()"
+          class="primary"
+          >Create New TA</v-btn
+        >
       </div>
       <br />
       <v-row align-content="start">
@@ -18,7 +27,7 @@
           <template v-if="editInfos">
             <v-treeview open-all hoverable :items="editInfos.treeView"
               ><template slot="label" slot-scope="{ item }">
-                <template v-if="userRole === 'creator'">
+                <template v-if="userInfo.userRole === 'creator'">
                   <v-toolbar :class="item.class">
                     <v-toolbar-title>{{ item.name }} </v-toolbar-title>
                     <v-spacer></v-spacer>
@@ -44,7 +53,7 @@
                     </v-btn>
                   </v-toolbar>
                 </template>
-                <template v-if="userRole === 'validator'">
+                <template v-if="userInfo.userRole === 'validator'">
                   <v-toolbar>
                     <v-toolbar-title>{{ item.name }} </v-toolbar-title>
                     <v-spacer></v-spacer>
@@ -72,7 +81,7 @@
                     </v-btn>
                   </v-toolbar>
                 </template>
-                <template v-if="userRole === 'viewer'">
+                <template v-if="userInfo.userRole === 'viewer'">
                   <v-toolbar>
                     <v-toolbar-title>{{ item.name }} </v-toolbar-title>
                     <v-spacer></v-spacer>
@@ -119,6 +128,15 @@
                       <td class="prop">{{ prop.label }}</td>
                       <td class="prop-value">{{ prop.recValue }}</td>
                     </tr>
+                    <tr
+                      v-for="prop in editObject.popupEdit"
+                      :key="prop.fieldName"
+                    >
+                      <template v-if="!prop.isEditable">
+                        <td class="prop">{{ prop.label }}</td>
+                        <td class="prop-value">{{ prop.recValue }}</td>
+                      </template>
+                    </tr>
                   </tbody>
                 </table>
               </template>
@@ -132,35 +150,37 @@
                       :key="prop.fieldName"
                     >
                       <!-- <td class="prop">{{ prop.label }}</td> -->
-                      <td class="prop-value">
-                        <template v-if="prop.domain">
-                          <v-combobox
-                            :id="prop.fieldName"
-                            :items="prop.domain.codedValues"
-                            :label="prop.fieldName"
-                            :value="prop.recValue"
-                            :ref="prop.fieldName"
-                            item-text="name"
-                            item-value="code"
-                          ></v-combobox>
-                        </template>
-
-                        <template v-else>
-                          <v-text-field
-                            v-if="
-                              prop.fieldType === 'esriFieldTypeString' ||
-                              prop.fieldType === 'esriFieldTypeSmallInteger'
-                            "
-                            :id="prop.fieldName"
-                            :label="prop.label"
-                            :value="prop.recValue"
-                          ></v-text-field>
-                          <template
-                            v-if="prop.fieldType === 'esriFieldTypeDate'"
-                          >
+                      <template v-if="prop.isEditable">
+                        <td class="prop-value">
+                          <template v-if="prop.domain">
+                            <v-combobox
+                              :id="prop.fieldName"
+                              :items="prop.domain.codedValues"
+                              :label="prop.fieldName"
+                              :value="prop.recValue"
+                              :ref="prop.fieldName"
+                              item-text="name"
+                              item-value="code"
+                            ></v-combobox>
                           </template>
-                        </template>
-                      </td>
+
+                          <template v-else>
+                            <v-text-field
+                              v-if="
+                                prop.fieldType === 'esriFieldTypeString' ||
+                                prop.fieldType === 'esriFieldTypeSmallInteger'
+                              "
+                              :id="prop.fieldName"
+                              :label="prop.label"
+                              :value="prop.recValue"
+                            ></v-text-field>
+                            <template
+                              v-if="prop.fieldType === 'esriFieldTypeDate'"
+                            >
+                            </template>
+                          </template>
+                        </td>
+                      </template>
                     </tr>
                     <!-- :return-value.sync="formDate.date" -->
                     <tr v-for="(formDate, f) in editObject.formDates" :key="f">
@@ -214,7 +234,7 @@
                   <v-btn class="primary" @click="cancelEdit()">Cancel</v-btn>
                   <v-btn
                     class="primary"
-                    v-if="editFormStatus !== 'new'"
+                    v-if="userInfo.userRole === 'creator'"
                     @click="deleteFeature()"
                     >Delete</v-btn
                   >
@@ -239,7 +259,7 @@ export default {
   props: {
     companyId: { typeof: Number },
     editInfos: { typeof: Object },
-    userRole: { typeof: String },
+    userInfo: { typeof: Object },
   },
   data: () => ({
     editObject: null,
@@ -248,6 +268,16 @@ export default {
     formDates: [],
     editFormStatus: null,
     companyInfo: null,
+    specialColumns: [
+      {
+        userRole: "creator",
+        columns: ["MEL_validation", "MEL_comments"],
+      },
+      {
+        userRole: "validator",
+        columns: ["BA_validation", "BA_comments"],
+      },
+    ],
   }),
   methods: {
     cancelDate(fieldName) {
@@ -320,7 +350,7 @@ export default {
       editI.popupDisplay.forEach((pitem) => {
         if (action !== "new") {
           let v = editI.feature.attributes[pitem.fieldName];
-          if (pitem.fieldType === "esriFieldTypeDate") {
+          if (pitem.fieldName.toLowerCase().includes("date")) {
             if (v) {
               v = new Date(v - new Date().getTimezoneOffset() * 60000)
                 .toISOString()
@@ -339,41 +369,53 @@ export default {
       });
       editI.popupEdit.forEach((pitem) => {
         //new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
-        if (action !== "new") {
-          let v = editI.feature.attributes[pitem.fieldName];
-          if (pitem.fieldType === "esriFieldTypeDate") {
-            if (v) {
-              v = new Date(v - new Date().getTimezoneOffset() * 60000)
-                .toISOString()
-                .substr(0, 10);
-            } else {
-              v = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-                .toISOString()
-                .substr(0, 10);
-            }
-            formDates.push({
-              id: dateIndex,
-              fieldName: pitem.fieldName,
-              label: pitem.label,
-              date: v,
-            });
-            dateIndex += 1;
-          }
-          pitem.recValue = v;
+
+        let sColumns = this.specialColumns.find((obj) => {
+          return obj.userRole === this.userInfo.userRole;
+        });
+        console.log("SCOLUMNS", sColumns);
+        if (sColumns.columns.includes(pitem.fieldName)) {
+          console.log("DONT", pitem.fieldName);
+          pitem.isEditable = false;
         } else {
-          pitem.recValue = null;
-          if (pitem.fieldType === "esriFieldTypeDate") {
-            formDates.push({
-              id: dateIndex,
-              fieldName: pitem.fieldName,
-              label: pitem.label,
-              date: new Date(
-                Date.now() - new Date().getTimezoneOffset() * 60000
-              )
-                .toISOString()
-                .substr(0, 10),
-            });
-            dateIndex += 1;
+          if (action !== "new") {
+            let v = editI.feature.attributes[pitem.fieldName];
+            if (pitem.fieldType === "esriFieldTypeDate") {
+              if (v) {
+                v = new Date(v - new Date().getTimezoneOffset() * 60000)
+                  .toISOString()
+                  .substr(0, 10);
+              } else {
+                v = new Date(
+                  Date.now() - new Date().getTimezoneOffset() * 60000
+                )
+                  .toISOString()
+                  .substr(0, 10);
+              }
+              formDates.push({
+                id: dateIndex,
+                fieldName: pitem.fieldName,
+                label: pitem.label,
+                date: v,
+              });
+              dateIndex += 1;
+            }
+            pitem.recValue = v;
+          } else {
+            pitem.recValue = null;
+            if (pitem.fieldType === "esriFieldTypeDate") {
+              formDates.push({
+                id: dateIndex,
+                fieldName: pitem.fieldName,
+                label: pitem.label,
+                date: new Date(
+                  Date.now() - new Date().getTimezoneOffset() * 60000
+                )
+                  .toISOString()
+                  .substr(0, 10),
+              });
+              dateIndex += 1;
+            }
           }
         }
       });

@@ -84,7 +84,7 @@ export default {
               response.data.features.forEach((userInfo) => {
                 userInfos.push(userInfo);
               });
-
+              console.log("USERINFOS", userInfos);
               vStore.dispatch("setEsriCred", esriCred);
               vStore.dispatch("setUserInfos", userInfos);
 
@@ -100,6 +100,7 @@ export default {
   },
 };
 </script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -108,11 +109,13 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 .max-main-height-col {
   height: calc(100vh - 100px);
   max-height: calc(100vh - 90px);
   border: #42b983;
 }
+
 .editor-max-main-height-col {
   height: calc(100vh - 400px);
   max-height: calc(100vh - 400px);
@@ -120,14 +123,17 @@ export default {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
 .prop-table {
   width: 100%;
 }
+
 .prop-alias {
   font-weight: bold;
   width: 40%;
   vertical-align: baseline;
 }
+
 .prop-value {
   align-content: left;
   width: 60%;

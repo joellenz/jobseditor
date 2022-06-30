@@ -55,7 +55,7 @@
                 ref="taInfo"
                 :companyId="comId"
                 :editInfos="editForms"
-                :userRole="taUserRole"
+                :userInfo="taUserRole"
               />
             </v-tab-item>
             <v-tab-item>
@@ -94,9 +94,19 @@ export default {
   data: () => ({
     webMapId: "316c5a9477bc4d7283f76addc75e66aa",
     taGroups: [
-      { group: "TAC", userRole: "creator" },
-      { group: "MEL Specialist", userRole: "validator" },
+      { group: "TAC", userRole: "creator", userGroup: "TAC Team Member" },
+      {
+        group: "MEL Specialist",
+        userRole: "validator",
+        userGroup: "MEL Team Member",
+      },
+      {
+        group: "TAC1",
+        userRole: "validator",
+        userGroup: "MEL Team Member",
+      },
     ],
+
     taUserRole: null,
     layerInfos: null,
     editForms: null,
@@ -127,6 +137,11 @@ export default {
   methods: {
     loadPage(comId) {
       //Get User Info to determine if they have access to this page and to what access level
+      if (comId) {
+        if (comId.startsWith("PA-")) {
+          comId = comId.replace("PA-", "");
+        }
+      }
       console.log(this.$store.state.userInfos);
       this.$store.state.userInfos.forEach((userInfo) => {
         console.log("USERINFO", userInfo);
@@ -135,12 +150,17 @@ export default {
         });
         if (userGroup) {
           console.log("USERROLE", userGroup.userRole);
-          this.taUserRole = userGroup.userRole;
+          this.taUserRole = userGroup;
         }
       });
 
       let _this = this;
       this.comId = this.$route.params.comId;
+      if (this.comId) {
+        if (this.comId.startsWith("PA-")) {
+          this.comId = this.comId.replace("PA-", "");
+        }
+      }
       let companyDataInfos = database.datasources.find((obj) => {
         return obj.layerId === "Companies";
       });
@@ -253,7 +273,7 @@ export default {
       this.companyInfo = item;
       this.$router.push({
         name: "TA",
-        params: { comId: item.objectid },
+        params: { comId: "PA-" + item.objectid },
       });
     },
     loadEditForms(editObject) {
@@ -274,7 +294,59 @@ export default {
           // _this.$refs.taInfo.loadTA(1);
           //this.loadPage(this.comId);
           //_this.tab = 1;
-          this.$router.go();
+          //send Email if Technical Assitance
+
+          let emailInfos = null;
+          //console.log(emailConfig);
+          if (editObject.layerId === "TechnichalAssistance") {
+            emailInfos = emailConfig.emails.find((obj) => {
+              return obj.action === "TA_NEW";
+            });
+            let companyDataInfos = database.datasources.find((obj) => {
+              return obj.layerId === "Companies";
+            });
+            queryHelper.getCompanyInfoById(
+              companyDataInfos,
+              this.comId,
+              ["*"],
+              (response) => {
+                console.log("Company", response);
+
+                //_this.companyInfo = response;
+                //Update Body
+                if (this.taUserRole.userRole === "creator") {
+                  //check for BA Validated
+                  // emailInfos.userIdQuery =
+                  //   "UserGroup = 'MEL Director' or UserGroup = 'MEL Specialist'";
+                  emailInfos.userIdQuery = "UserGroup = 'TAC'";
+                  emailInfos.body = `****TESTING****A new TA for the ${response.attributes.firmName} has been created. Please review the TA using the following link: https://arcgis.tunisiajobs.org/QA/JOBSEditor/ta/PA-${this.comId}`;
+                }
+                console.log("EMAILEDITOBJECT", editObject);
+                let sendTheEmail = true;
+                if (this.taUserRole.userRole === "validator") {
+                  if (editObject.editFeature.MEL_validation === "Yes") {
+                    emailInfos.userIdQuery = "UserGroup = 'TAC'";
+                    emailInfos.body = `****TESTING****The TA for Company: ${response.attributes.firmName} has been validated by the MEL Team. Please review the TA using the following link: https://arcgis.tunisiajobs.org/QA/JOBSEditor/ta/PA-${this.comId}`;
+                  } else if (editObject.editFeature.MEL_validation === "No") {
+                    emailInfos.userIdQuery = "UserGroup = 'TAC'";
+                    emailInfos.body = `****TESTING****The TA for Company: ${response.attributes.firmName} is NOT validated by the MEL Team. Please review MEL Team Comments for the TA using the following link: https://arcgis.tunisiajobs.org/QA/JOBSEditor/ta/PA-${this.comId}`;
+                  } else {
+                    //don't send email
+                    sendTheEmail = false;
+                  }
+                }
+
+                console.log("EMAILINFOS", emailInfos);
+                if (sendTheEmail) {
+                  queryHelper.sendEmail(emailInfos, (emailResponse) => {
+                    this.$router.go();
+                  });
+                }
+              }
+            );
+          }
+
+          //this.$router.go();
         }
       );
     },
@@ -395,38 +467,6 @@ export default {
       //Object ID, change firmStatus i f validated = "Yes",
       //required PA
       //objectid, Created By User, comments, validated, signature date if validated = "Yes", TLG_APPROVED = "" if validated = "No"
-    },
-    sendEmail(emailInfos, callback) {
-      console.log("Email Infos", emailInfos);
-      let retVal = {
-        message: "Emails Sent",
-      };
-      callback(retVal);
-      // var data = {
-      //   email_config: {
-      //     user_name: created_by,
-      //     Body: `The PA for the company ${companyName} uploaded by you under the reference ${feature.attributes.PAREF} is signed by COP/DCOP.<br/> Please click this link to upload documents and proceed further https://arcgis.tunisiajobs.org/c1/main/BA`,
-      //   },
-      // };
-      // var urlWS = "https://arcgis.tunisiajobs.org/jobsapi/api/email/SendEmail";
-      // var promise = request
-      //   .post(urlWS, {
-      //     data: JSON.stringify(data),
-      //     method: "POST",
-      //     handleAs: "json",
-      //     headers: {
-      //       "X-Requested-With": null,
-      //       "Content-Type": "application/json;charset=UTF-8",
-      //     },
-      //   })
-      //   .then(
-      //     lang.hitch(this, function (response) {
-      //       console.log(response);
-      //     }),
-      //     lang.hitch(this, function (error) {
-      //       console.log("---error", error);
-      //     })
-      //   );
     },
   },
   computed: {
