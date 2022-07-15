@@ -10,6 +10,7 @@ import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import esriRequest from "@arcgis/core/request";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
+import Graphic from "@arcgis/core/Graphic";
 import Point from "@arcgis/core/geometry/Point";
 //Widgets
 import Home from "@arcgis/core/widgets/Home";
@@ -79,7 +80,23 @@ export default {
                 query.where = clayer.filter;
                 query.outFields = ["*"];
                 event.layer.queryFeatures(query).then((response) => {
+                  _this.graphicsLayer.removeAll();
                   let pt = response.features[0].geometry;
+                  let markerSymbol = {
+                    type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+                    style: "circle",
+                    color: [0, 255, 255, 0.5],
+                    outline: {
+                      // autocasts as new SimpleLineSymbol()
+                      color: [128, 128, 128, 0.5],
+                      width: "0.5px",
+                    },
+                  };
+                  let g = new Graphic({
+                    geometry: pt,
+                    symbol: markerSymbol,
+                  });
+                  _this.graphicsLayer.add(g);
                   _this.buildEditForms(mapView.map, response.features[0]);
                   mapView.goTo({ target: pt, zoom: 18 }).catch((error) => {
                     if (error.name != "AbortError") {
