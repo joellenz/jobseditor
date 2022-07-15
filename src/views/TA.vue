@@ -88,25 +88,13 @@ import emailConfig from "@/assets/config/email.json";
 import database from "@/assets/config/database.json";
 import tableDefs from "@/assets/config/tables.json";
 import Confirmation from "../components/Dialogs/Confirmation.vue";
+import taConfig from "@/assets/config/taConfig.json";
+
 export default {
   name: "TA",
   components: { WebMap, CompanyInfo, TAInfo, Confirmation },
   data: () => ({
     webMapId: "316c5a9477bc4d7283f76addc75e66aa",
-    taGroups: [
-      { group: "TAC", userRole: "creator", userGroup: "TAC Team Member" },
-      {
-        group: "MEL Specialist",
-        userRole: "validator",
-        userGroup: "MEL Team Member",
-      },
-      {
-        group: "TAC1",
-        userRole: "validator",
-        userGroup: "MEL Team Member",
-      },
-    ],
-
     taUserRole: null,
     layerInfos: null,
     editForms: null,
@@ -145,7 +133,7 @@ export default {
       console.log(this.$store.state.userInfos);
       this.$store.state.userInfos.forEach((userInfo) => {
         console.log("USERINFO", userInfo);
-        let userGroup = this.taGroups.find((obj) => {
+        let userGroup = taConfig.taGroups.find((obj) => {
           return obj.group === userInfo.attributes.UserGroup;
         });
         if (userGroup) {
@@ -297,7 +285,7 @@ export default {
           //send Email if Technical Assitance
 
           let emailInfos = null;
-          //console.log(emailConfig);
+          console.log(editObject.layerId);
           if (editObject.layerId === "TechnichalAssistance") {
             emailInfos = emailConfig.emails.find((obj) => {
               return obj.action === "TA_NEW";
@@ -346,7 +334,7 @@ export default {
             );
           }
 
-          //this.$router.go();
+          this.$router.go();
         }
       );
     },

@@ -111,38 +111,7 @@
           <template v-if="editObject">
             <h3>{{ editObject.title }}</h3>
             <div class="editor-max-main-height-col">
-              <template v-if="editObject.popupDisplay.length > 0">
-                <h4>Information Fields</h4>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Property</th>
-                      <th>Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr
-                      v-for="prop in editObject.popupDisplay"
-                      :key="prop.fieldName"
-                    >
-                      <td class="prop">{{ prop.label }}</td>
-                      <td class="prop-value">{{ prop.recValue }}</td>
-                    </tr>
-                    <tr
-                      v-for="prop in editObject.popupEdit"
-                      :key="prop.fieldName"
-                    >
-                      <template v-if="!prop.isEditable">
-                        <td class="prop">{{ prop.label }}</td>
-                        <td class="prop-value">{{ prop.recValue }}</td>
-                      </template>
-                    </tr>
-                  </tbody>
-                </table>
-              </template>
               <template v-if="editObject.popupEdit.length > 0">
-                <h4>Edit Fields</h4>
-
                 <table>
                   <tbody>
                     <tr
@@ -156,7 +125,7 @@
                             <v-combobox
                               :id="prop.fieldName"
                               :items="prop.domain.codedValues"
-                              :label="prop.fieldName"
+                              :label="prop.label"
                               :value="prop.recValue"
                               :ref="prop.fieldName"
                               item-text="name"
@@ -179,6 +148,17 @@
                             >
                             </template>
                           </template>
+                        </td>
+                      </template>
+                      <template v-else>
+                        <td>
+                          <v-text-field
+                            :id="prop.fieldName"
+                            :label="prop.label"
+                            :value="prop.recValue"
+                            filled
+                            disabled
+                          ></v-text-field>
                         </td>
                       </template>
                     </tr>
@@ -229,7 +209,7 @@
                 </table>
               </template>
               <br />
-              <v-row>
+              <v-row v-if="formIsEditable">
                 <v-col md="12">
                   <v-btn class="primary" @click="cancelEdit()">Cancel</v-btn>
                   <v-btn
@@ -254,6 +234,7 @@
 <script>
 import database from "@/assets/config/database.json";
 import queryHelper from "@/assets/scripts/QueryHelper.js";
+import taConfig from "@/assets/config/taConfig.json";
 export default {
   name: "TAInfo",
   props: {
@@ -268,16 +249,7 @@ export default {
     formDates: [],
     editFormStatus: null,
     companyInfo: null,
-    specialColumns: [
-      {
-        userRole: "creator",
-        columns: ["MEL_validation", "MEL_comments"],
-      },
-      {
-        userRole: "validator",
-        columns: ["BA_validation", "BA_comments"],
-      },
-    ],
+    formIsEditable: false,
   }),
   methods: {
     cancelDate(fieldName) {
@@ -342,42 +314,69 @@ export default {
       this.buildeditForm("new", editI);
     },
     buildeditForm(action, editI) {
+      this.formIsEditable = false;
+      console.log("TACONFIG", taConfig);
+      console.log("USERINFO", this.userInfo);
+      let userConfig = taConfig.taGroups.find((obj) => {
+        return obj.group === this.userInfo.group;
+      });
+      console.log("USERINFO", userConfig);
+      let editFields;
+      switch (editI.layerId) {
+        case "TechnichalAssistance":
+          editFields = userConfig.taEditFields;
+          break;
+        case "Technical_Assistance_Provider":
+          editFields = userConfig.tapEditFields;
+          break;
+        case "Consultant":
+          editFields = userConfig.tapcEditFields;
+          break;
+      }
+      console.log("EDITFIELDS", editFields);
       this.editFormStatus = action;
       this.editObject = null;
       console.log("EDITOBJECT", editI);
       let formDates = [];
       let dateIndex = 0;
       editI.popupDisplay.forEach((pitem) => {
-        if (action !== "new") {
-          let v = editI.feature.attributes[pitem.fieldName];
-          if (pitem.fieldName.toLowerCase().includes("date")) {
-            if (v) {
-              v = new Date(v - new Date().getTimezoneOffset() * 60000)
-                .toISOString()
-                .substr(0, 10);
-            } else {
-              v = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-                .toISOString()
-                .substr(0, 10);
+        let chkField = editFields.find((obj) => {
+          return obj.field === pitem.fieldName;
+        });
+        if (chkField) {
+          if (action !== "new") {
+            let v = editI.feature.attributes[pitem.fieldName];
+            if (pitem.fieldName.toLowerCase().includes("date")) {
+              if (v) {
+                v = new Date(v - new Date().getTimezoneOffset() * 60000)
+                  .toISOString()
+                  .substr(0, 10);
+              } else {
+                v = new Date(
+                  Date.now() - new Date().getTimezoneOffset() * 60000
+                )
+                  .toISOString()
+                  .substr(0, 10);
+              }
             }
-          }
 
-          pitem.recValue = v;
+            pitem.recValue = v;
+          } else {
+            pitem.recValue = null;
+          }
+          this.formIsEditable = true;
         } else {
-          pitem.recValue = null;
+          pitem.visible = true;
+          pitem.isEditable = false;
         }
       });
       editI.popupEdit.forEach((pitem) => {
         //new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)
-
-        let sColumns = this.specialColumns.find((obj) => {
-          return obj.userRole === this.userInfo.userRole;
+        console.log(pitem);
+        let chkField = editFields.find((obj) => {
+          return obj.field === pitem.fieldName;
         });
-        console.log("SCOLUMNS", sColumns);
-        if (sColumns.columns.includes(pitem.fieldName)) {
-          console.log("DONT", pitem.fieldName);
-          pitem.isEditable = false;
-        } else {
+        if (chkField) {
           if (action !== "new") {
             let v = editI.feature.attributes[pitem.fieldName];
             if (pitem.fieldType === "esriFieldTypeDate") {
@@ -417,6 +416,10 @@ export default {
               dateIndex += 1;
             }
           }
+          this.formIsEditable = true;
+        } else {
+          pitem.visible = true;
+          pitem.isEditable = false;
         }
       });
       editI.formDates = formDates;

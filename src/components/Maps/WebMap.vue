@@ -81,7 +81,7 @@ export default {
                 event.layer.queryFeatures(query).then((response) => {
                   let pt = response.features[0].geometry;
                   _this.buildEditForms(mapView.map, response.features[0]);
-                  mapView.goTo({ target: pt, zoom: 15 }).catch((error) => {
+                  mapView.goTo({ target: pt, zoom: 18 }).catch((error) => {
                     if (error.name != "AbortError") {
                       console.error(error);
                     }
@@ -296,61 +296,6 @@ export default {
 
               editObject.treeView = featureTrees;
 
-              // responses1.forEach((response1, i) => {
-              //   let editFeatures = [];
-              //   let prevI = 0;
-              //   let pGlobalIds = [];
-              //   let nodeName = "";
-
-              //   switch (i) {
-              //     case 0:
-              //       editFeatures = response1.data.features.filter((obj) => {
-              //         return obj.attributes.ParentGUID === globalId;
-              //       });
-              //       featureTree = {
-              //         id: -1,
-              //         name:
-              //           editObjects[i].title + " (" + editFeatures.length + ")",
-              //         companyId: globalId,
-              //         layerId: editObjects[i].layerId,
-              //         title: editObjects[i].title,
-              //       };
-              //       children = [];
-              //       console.log("GIDFIELD", editObjects[i].globalIdField);
-              //       editFeatures.forEach((f) => {
-              //         console.log("FEATURE", f);
-              //         nodeName =
-              //           f.attributes.Type_of_Technical_Assistance === null
-              //             ? "TA: NULL"
-              //             : "TA: " + f.attributes.Type_of_Technical_Assistance;
-              //         children.push({
-              //           id: f.attributes[editObjects[i].objectIdField],
-              //           name: nodeName,
-              //           globalId: f.attributes[editObjects[i].globalIdField],
-              //           layerId: editObjects[i].layerId,
-              //           feature: f,
-              //         });
-              //       });
-              //       //children.push({ id: -1, name: "TA: Create New" });
-              //       featureTree.children = children;
-              //       featureTrees.push(featureTree);
-
-              //       break;
-              //     default:
-              //       prevI = i - 1;
-              //       pGlobalIds = [];
-              //       editObjects[prevI].features.forEach((pFeature) => {
-              //         //handle manys
-              //         pGlobalIds.push(pFeature.attributes.GlobalID);
-              //       });
-              //       editFeatures = response1.data.features.filter((obj) => {
-              //         return pGlobalIds.includes(obj.attributes.ParentGUID);
-              //       });
-
-              //       break;
-              //   }
-              // });
-
               _this.$root.$emit("loadEditForms", editObject);
             })
           );
@@ -366,13 +311,13 @@ export default {
 </script>
 <style scoped>
 @import url("https://js.arcgis.com/4.18/esri/themes/light/main.css");
-
 .viewdiv {
   padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
 }
+
 .map-div {
   position: relative;
   height: 100%;
